@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "comment-core-library": "^0.11.1",
+    "crypto-js": "^4.2.0",
     "danmaku": "^2.0.6",
     "danmaku.js": "^0.0.0",
     "element-plus": "^2.3.14",

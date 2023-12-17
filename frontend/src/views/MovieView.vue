@@ -3,7 +3,7 @@
 
 <template>
     <p>
-        this is Admin page
+        this is movie page
     </p>
 </template>
 
