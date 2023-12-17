@@ -36,13 +36,16 @@ export default {
         </p>
         <div class="articalBox">
             <div v-for="item in  articalList " :key="item.id" class="articalItem">
-                <div class="picBox">
-                    <el-image style="width: auto; height: auto" :src=item.picurl :fit="contain" />
+                <h2>{{ item.title }}</h2>
+                <div class="info">
+                    <div class="picBox">
+                        <el-image style="width: auto; height: auto" :src=item.picurl :fit="contain" />
+                    </div>
+                    <div class="contentBox">
+                        <p>{{ item.content }}</p>
+                    </div>
                 </div>
-                <div class="contentBox">
-                    <h2>{{ item.title }}</h2>
-                    <p>{{ item.content }}</p>
-                </div>
+
             </div>
         </div>
     </div>
@@ -65,7 +68,7 @@ export default {
     flex-direction: row;
     justify-content: center;
 
-    background-color: gainsboro;
+    background-color: rgb(224, 224, 224);
     border-radius: 15px;
 
     width: 90%;
@@ -74,25 +77,38 @@ export default {
 }
 
 .articalItem {
-    background-color: rgb(174, 174, 174);
+    background-color: rgb(255, 255, 255);
     border-radius: 15px;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     padding: 20px;
     width: 90%;
     height: 200px;
     margin: 20px 30px;
 }
 
-.articalItem p {
-    margin: 0;
+.articalItem h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.info {
+    display: flex;
+
+    width: 100%;
+    height: 80%;
 }
 
 .picBox {
     display: flex;
     height: 100%;
-    width: 20%;
+    width: auto;
+}
+
+.picBox img {
+    display: flex;
+    border-radius: 15px;
 }
 
 .contentBox {
@@ -102,5 +118,9 @@ export default {
 
     margin-left: 40px;
     height: 100%;
+}
+
+.contentBox p {
+    margin-top: 0;
 }
 </style>

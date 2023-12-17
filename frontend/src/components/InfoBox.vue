@@ -1,0 +1,145 @@
+<template>
+    <article class="movie-card">
+        <img :src="src" alt="Avatar wallpaper" />
+
+        <div class="content">
+            <h1>{{ title }}</h1>
+
+            <div class="infos">
+                <span>·&nbsp;&nbsp;2022&nbsp;&nbsp;·&nbsp;&nbsp;3h12</span>
+            </div>
+
+            <p class="synopsis">
+                {{ synopsis }}
+            </p>
+        </div>
+    </article>
+</template>
+
+<script>
+export default {
+    props: {
+        src: {
+            type: String,
+            required: true
+        },
+        title: {
+            type: String,
+            required: true
+        },
+        synopsis: {
+            type: String,
+            required: true
+        }
+    }
+}
+</script>
+
+<style>
+.movie-card {
+    --transition-duration: 700ms;
+    color: white;
+    position: relative;
+    border-radius: 0.6em;
+    overflow: hidden;
+    font-size: 120%;
+    height: min(21em, 90vh);
+    max-width: 90vw;
+    aspect-ratio: 16/9;
+    box-shadow: var(--shadow-lg), var(--shadow-lg), var(--shadow-lg);
+    transition: transform var(--transition-duration);
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 80% -150%,
+                transparent 60%,
+                rgba(0, 0, 0, 0.5));
+        transition: box-shadow var(--transition-duration);
+        mix-blend-mode: overlay;
+    }
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    transition: transform var(--transition-duration);
+    object-fit: cover;
+    object-position: center;
+}
+
+.content {
+    z-index: 1;
+    position: absolute;
+    bottom: min(3.5em, 6vmin);
+    left: min(3em, 8vmin);
+    right: min(3em, 8vmin);
+    text-align: left;
+    transition: transform var(--transition-duration) var(--ease-in-out);
+
+    >* {
+        position: relative;
+        will-change: transform;
+    }
+}
+
+h1 {
+    font-size: 2.8em;
+    color: inherit;
+    margin: 0;
+}
+
+.infos {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #eee;
+    display: flex;
+    gap: 0.35em;
+    align-items: flex-end;
+
+    span {
+        line-height: 2;
+    }
+}
+
+.synopsis {
+    font-size: 1.4em;
+    line-height: 1.4;
+    margin-block: 0.75em;
+    padding: 10px;
+    border-radius: 15px;
+    transition-delay: calc(var(--transition-duration) / 8);
+    transition-property: opacity, transform;
+    transition-duration: calc(var(--transition-duration) / 2);
+}
+
+.icons {
+    display: flex;
+    gap: 0.5em;
+}
+
+.movie-card:hover {
+    transform: scale(1.1);
+
+    img {
+        transform: scale(1.1);
+    }
+
+    .synopsis {
+        transition-duration: var(--transition-duration);
+        transition-delay: calc(var(--transition-duration) / 3);
+    }
+}
+
+.movie-card:not(:hover) {
+    .synopsis {
+        opacity: 0;
+        transform: translateY(1em);
+    }
+
+    .content {
+        transform: translateY(calc(100% - 4.5em));
+    }
+}
+</style>
