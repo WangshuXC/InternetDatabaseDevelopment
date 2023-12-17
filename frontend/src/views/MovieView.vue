@@ -65,7 +65,7 @@ export default {
     background-color: gainsboro;
     border-radius: 15px;
 
-    width: 80%;
+    width: 90%;
     height: auto;
     padding: 30px;
 }

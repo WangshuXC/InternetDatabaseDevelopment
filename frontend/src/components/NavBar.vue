@@ -14,12 +14,10 @@
 </template>
 
 <script>
-import qqImage from '@/assets/imgs/qq.jpg';
 export default {
     data() {
         return {
             searchText: '',
-            imageUrl: qqImage,
         };
     },
     methods: {

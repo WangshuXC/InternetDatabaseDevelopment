@@ -1,5 +1,6 @@
 <script>
 //import CryptoJS from 'crypto-js';
+import { ElMessage } from 'element-plus'
 export default {
     data() {
         return {
@@ -25,7 +26,7 @@ export default {
         },
         register() {
             if (this.registerData.password !== this.registerData.confirmPassword) {
-                alert("密码和确认密码不一致");
+                ElMessage.error('密码和确认密码不一致')
                 return;
             }
         },
@@ -42,8 +43,12 @@ export default {
             sessionStorage.setItem('encryptedUsername', this.loginData.username);
             sessionStorage.setItem('encryptedPassword', this.loginData.password);
 
+            ElMessage.success('登陆成功')
+
             // 导航到 /home 路径
-            window.location.href = '/home';
+            setTimeout(() => {
+                window.location.href = '/home';
+            }, 2000);
         }
     }
 };
