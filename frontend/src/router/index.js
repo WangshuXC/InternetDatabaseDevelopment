@@ -5,18 +5,18 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: () => import('../views/HomeView.vue'),
-      meta: {
-        showNavBar: true
-      },
-    },
-    {
-      path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue'),
       meta: {
         showNavBar: false
+      },
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: () => import('../views/HomeView.vue'),
+      meta: {
+        showNavBar: true
       },
     },
     {
@@ -36,8 +36,8 @@ const router = createRouter({
       },
     },
     {
-      path: '/comic',
-      name: 'comic',
+      path: '/artical',
+      name: 'artical',
       component: () => import('../views/ArticalView.vue'),
       meta: {
         showNavBar: true
@@ -69,5 +69,17 @@ const router = createRouter({
     },
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const encryptedUsername = sessionStorage.getItem('encryptedUsername');
+  const encryptedPassword = sessionStorage.getItem('encryptedPassword');
+
+  // 检查 Session Storage 中的值
+  if (!encryptedUsername && !encryptedPassword && to.path !== '/') {
+    next('/');
+  } else {
+    next();
+  }
+});
 
 export default router

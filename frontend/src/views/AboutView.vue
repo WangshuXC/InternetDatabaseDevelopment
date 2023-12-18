@@ -1,11 +1,62 @@
 <script>
+import MenberBox1 from '../components/MenberBox1.vue';
+import MenberBox2 from '../components/MenberBox2.vue';
+import MenberBox3 from '../components/MenberBox3.vue';
+import MenberBox4 from '../components/MenberBox4.vue';
+
+export default {
+    components: {
+        MenberBox1,
+        MenberBox2,
+        MenberBox3,
+        MenberBox4,
+    }
+}
 </script>
 
 <template>
-    <p>
-        this is about page
-    </p>
+    <div class="aboutContainer">
+        <p>
+            this is about page
+        </p>
+        <div class="webInfo1">
+            <MenberBox1></MenberBox1>
+            <MenberBox2></MenberBox2>
+        </div>
+        <div class="webInfo2">
+            <MenberBox3></MenberBox3>
+            <MenberBox4></MenberBox4>
+        </div>
+        <p>
+            this is tail
+        </p>
+    </div>
 </template>
 
 
-<style></style>
+<style>
+.aboutContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    overflow-x: hidden;
+}
+
+.webInfo1 {
+    display: flex;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+.webInfo2 {
+    display: flex;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+.card {
+    margin-inline: 30px;
+}
+</style>

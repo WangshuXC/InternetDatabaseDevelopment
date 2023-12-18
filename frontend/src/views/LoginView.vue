@@ -1,4 +1,6 @@
 <script>
+//import CryptoJS from 'crypto-js';
+import { ElMessage } from 'element-plus'
 export default {
     data() {
         return {
@@ -23,13 +25,30 @@ export default {
             }
         },
         register() {
-            // 检查密码和确认密码是否一致
             if (this.registerData.password !== this.registerData.confirmPassword) {
-                alert("密码和确认密码不一致");
+                ElMessage.error('密码和确认密码不一致')
                 return;
             }
         },
         login() {
+            // const encryptedUsername = CryptoJS.AES.encrypt(this.loginData.username, 'encryptionKey').toString();
+            // const encryptedPassword = CryptoJS.AES.encrypt(this.loginData.password, 'encryptionKey').toString();
+            // 将加密后的数据存储到 Session Storage
+            // sessionStorage.setItem('encryptedUsername', encryptedUsername);
+            // sessionStorage.setItem('encryptedPassword', encryptedPassword);
+            // 读取session
+            // const encryptedUsername1 = sessionStorage.getItem('encryptedUsername');
+            // const encryptedPassword1 = sessionStorage.getItem('encryptedPassword');
+
+            sessionStorage.setItem('encryptedUsername', this.loginData.username);
+            sessionStorage.setItem('encryptedPassword', this.loginData.password);
+
+            ElMessage.success('登陆成功')
+
+            // 导航到 /home 路径
+            setTimeout(() => {
+                window.location.href = '/home';
+            }, 2000);
         }
     }
 };
