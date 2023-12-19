@@ -1,7 +1,7 @@
 <template>
     <el-menu :default-active="getCurrentMenuUrl()" class="el-menu" mode="horizontal" router="false" menu-trigger="hover"
         :ellipsis="false" unique-opened>
-        <el-menu-item index="/home">首页</el-menu-item>
+        <el-menu-item index="/">首页</el-menu-item>
 
         <el-input v-model="searchText" class="search" size="large" placeholder="输入关键字进行搜索..." />
 
@@ -39,5 +39,6 @@ export default {
     margin-left: 20%;
     margin-right: 10%;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 </style>

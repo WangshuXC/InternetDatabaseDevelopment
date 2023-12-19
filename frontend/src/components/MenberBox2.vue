@@ -45,7 +45,6 @@ export default {
                     color: '#1ed76d',
                     icon: 'fa-brands fa-weixin',
                     content: 'hbwyzjswy',
-                    link: '#'
                 }
             ]
         }
@@ -58,7 +57,7 @@ export default {
 }
 </script>
     
-<style>
+<style scoped>
 * {
     padding: 0;
     margin: 0;

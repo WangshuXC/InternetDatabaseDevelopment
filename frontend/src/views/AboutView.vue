@@ -42,12 +42,16 @@ export default {
     display: flex;
     margin-top: 10vh;
     margin-bottom: 10vh;
+    width: 100%;
+    justify-content: space-evenly;
 }
 
 .webInfo2 {
     display: flex;
     margin-top: 10vh;
     margin-bottom: 10vh;
+    width: 100%;
+    justify-content: space-evenly;
 }
 
 .card {

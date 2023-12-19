@@ -67,6 +67,14 @@ const router = createRouter({
         showNavBar: false
       },
     },
+    {
+      path: "/:path(.*)",
+      name: 'NotFound',
+      meta: {
+        showNavBar: false
+      },
+      component: () => import('../views/NotFoundView.vue')
+    },
   ]
 })
 

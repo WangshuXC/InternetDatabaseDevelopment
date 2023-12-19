@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showNavBar" class="App-Header">
+  <div v-if="show" class="App-Header">
     <NavBar></NavBar>
   </div>
 
@@ -7,7 +7,7 @@
     <router-view></router-view>
   </div>
 
-  <div class="App-Footer">
+  <div v-if="show" class="App-Footer">
     <WaveFoot></WaveFoot>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
     WaveFoot
   },
   computed: {
-    showNavBar() {
+    show() {
       const meta = this.$route.meta;
 
       return !meta || meta.showNavBar !== false;
@@ -33,6 +33,10 @@ export default {
 </script>
 
 <style>
+html {
+  background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+}
+
 .App-Header {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -41,4 +45,6 @@ export default {
   display: flex;
   justify-content: center;
 }
+
+.App-Footer {}
 </style>

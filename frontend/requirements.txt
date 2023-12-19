@@ -4,4 +4,5 @@ npm install element-plus --save
 npm install plyr --save
 npm install comment-core-library --save
 npm install crypto-js
+npm install gsap
 

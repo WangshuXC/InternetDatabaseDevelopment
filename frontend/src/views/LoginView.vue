@@ -44,7 +44,7 @@ export default {
 
             // 导航到 /home 路径
             setTimeout(() => {
-                window.location.href = '/home';
+                window.location.href = '/';
             }, 2000);
         }
     }
