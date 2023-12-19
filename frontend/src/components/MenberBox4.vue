@@ -11,7 +11,7 @@
         </div>
         <ul class="contact">
             <li v-for="(item, index) in contactList" :style="{ '--clr': item.color, '--i': index }" :key="index">
-                <a :href="item.link">
+                <a :href="item.link" target="_blank">
                     <div class="iconBx"><i :class="item.icon"></i></div>
                     <p>{{ item.content }}</p>
                 </a>
@@ -44,7 +44,7 @@ export default {
                 {
                     color: '#1ed76d',
                     icon: 'fa-brands fa-weixin',
-                    content: 'WangshuXC',
+                    content: 'W17710199820',
                     link: '#'
                 }
             ]

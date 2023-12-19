@@ -14,9 +14,6 @@ export default {
 
 <template>
     <div class="movieContainer">
-        <p>
-            this is movie page
-        </p>
         <div class="movieBox">
             <div v-for="item in movieList" :key="item.id" class="movieItem">
                 <InfoBox :src="item.picurl" :title="item.title" :synopsis="item.content" />
@@ -32,6 +29,7 @@ export default {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-top: 3vh;
     width: 100vw;
     height: auto;
 }

@@ -31,9 +31,6 @@ export default {
 
 <template>
     <div class="articalContainner">
-        <p>
-            this is artical page
-        </p>
         <div class="articalBox">
             <div v-for="item in  articalList " :key="item.id" class="articalItem">
                 <h2>{{ item.title }}</h2>
@@ -58,6 +55,7 @@ export default {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-top: 3vh;
     width: 100vw;
     height: auto;
 }

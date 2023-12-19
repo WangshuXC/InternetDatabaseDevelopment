@@ -2,7 +2,7 @@
     <article class="movie-card">
         <img :src="src" alt="Avatar wallpaper" />
 
-        <div class="content">
+        <div class="cardContent">
             <h1>{{ title }}</h1>
 
             <div class="infos">
@@ -42,8 +42,8 @@ export default {
     position: relative;
     border-radius: 0.6em;
     overflow: hidden;
-    font-size: 120%;
-    height: min(21em, 90vh);
+    font-size: 100%;
+    height: min(15em, 25vh);
     max-width: 90vw;
     aspect-ratio: 16/9;
     box-shadow: var(--shadow-lg), var(--shadow-lg), var(--shadow-lg);
@@ -69,13 +69,14 @@ img {
     object-position: center;
 }
 
-.content {
+.cardContent {
     z-index: 1;
     position: absolute;
-    bottom: min(3.5em, 6vmin);
-    left: min(3em, 8vmin);
+    bottom: min(0.5em, 5vmin);
+    left: min(2em, 8vmin);
     right: min(3em, 8vmin);
     text-align: left;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     transition: transform var(--transition-duration) var(--ease-in-out);
 
     >* {
@@ -85,7 +86,7 @@ img {
 }
 
 h1 {
-    font-size: 2.8em;
+    font-size: 1.6em;
     color: inherit;
     margin: 0;
 }
@@ -104,19 +105,14 @@ h1 {
 }
 
 .synopsis {
-    font-size: 1.4em;
-    line-height: 1.4;
-    margin-block: 0.75em;
+    font-size: 1.0em;
+    line-height: 1.2;
+    margin-block: 1.75em;
     padding: 10px;
     border-radius: 15px;
     transition-delay: calc(var(--transition-duration) / 8);
     transition-property: opacity, transform;
     transition-duration: calc(var(--transition-duration) / 2);
-}
-
-.icons {
-    display: flex;
-    gap: 0.5em;
 }
 
 .movie-card:hover {
@@ -135,10 +131,10 @@ h1 {
 .movie-card:not(:hover) {
     .synopsis {
         opacity: 0;
-        transform: translateY(1em);
+        transform: translateY(0.5em);
     }
 
-    .content {
+    .cardContent {
         transform: translateY(calc(100% - 4.5em));
     }
 }

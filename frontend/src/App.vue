@@ -6,15 +6,21 @@
   <div class="App-Containner">
     <router-view></router-view>
   </div>
+
+  <div class="App-Footer">
+    <WaveFoot></WaveFoot>
+  </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue';
+import WaveFoot from './components/WaveFoot.vue';
 
 export default {
   name: 'App',
   components: {
     NavBar,
+    WaveFoot
   },
   computed: {
     showNavBar() {

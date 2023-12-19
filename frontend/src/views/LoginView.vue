@@ -1,5 +1,4 @@
 <script>
-//import CryptoJS from 'crypto-js';
 import { ElMessage } from 'element-plus'
 export default {
     data() {
@@ -16,6 +15,13 @@ export default {
             isLoginBoxUp: false
         };
     },
+    created() {
+        const Username = sessionStorage.getItem('Username');
+        const Password = sessionStorage.getItem('Password');
+        if (Username && Password) {
+            window.location.href = '/home';
+        }
+    },
     methods: {
         toggleForm(form) {
             if (form === 'login') {
@@ -31,17 +37,8 @@ export default {
             }
         },
         login() {
-            // const encryptedUsername = CryptoJS.AES.encrypt(this.loginData.username, 'encryptionKey').toString();
-            // const encryptedPassword = CryptoJS.AES.encrypt(this.loginData.password, 'encryptionKey').toString();
-            // 将加密后的数据存储到 Session Storage
-            // sessionStorage.setItem('encryptedUsername', encryptedUsername);
-            // sessionStorage.setItem('encryptedPassword', encryptedPassword);
-            // 读取session
-            // const encryptedUsername1 = sessionStorage.getItem('encryptedUsername');
-            // const encryptedPassword1 = sessionStorage.getItem('encryptedPassword');
-
-            sessionStorage.setItem('encryptedUsername', this.loginData.username);
-            sessionStorage.setItem('encryptedPassword', this.loginData.password);
+            sessionStorage.setItem('Username', this.loginData.username);
+            sessionStorage.setItem('Password', this.loginData.password);
 
             ElMessage.success('登陆成功')
 

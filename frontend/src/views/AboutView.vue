@@ -10,15 +10,12 @@ export default {
         MenberBox2,
         MenberBox3,
         MenberBox4,
-    }
+    },
 }
 </script>
 
 <template>
     <div class="aboutContainer">
-        <p>
-            this is about page
-        </p>
         <div class="webInfo1">
             <MenberBox1></MenberBox1>
             <MenberBox2></MenberBox2>
@@ -27,9 +24,6 @@ export default {
             <MenberBox3></MenberBox3>
             <MenberBox4></MenberBox4>
         </div>
-        <p>
-            this is tail
-        </p>
     </div>
 </template>
 
