@@ -42,14 +42,15 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'api/getuser' => 'api/getuser',
+                'api/getarticle' => 'api/getarticle',
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];
