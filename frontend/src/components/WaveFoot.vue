@@ -8,10 +8,10 @@
                     <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
                 </defs>
                 <g class="parallax">
-                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(159, 159, 159,0.7)" />
-                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(159, 159, 159,0.5)" />
-                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(159, 159, 159,0.3)" />
-                    <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(159, 159, 159)" />
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255, 255, 255,0.7)" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255, 255, 255,0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255, 255, 255,0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(255, 255, 255)" />
                 </g>
 
             </svg>
@@ -25,11 +25,6 @@
     margin: 0;
 }
 
-.waveContainer h1 {
-    font-weight: 300;
-    letter-spacing: 2px;
-    font-size: 48px;
-}
 
 .waveContainer p {
     font-family: 'Lato', sans-serif;
@@ -42,7 +37,6 @@
     position: relative;
     text-align: center;
     /* background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%); */
-    color: rgb(159, 159, 159);
 }
 
 .inner-header {
@@ -114,10 +108,6 @@
 
     .content {
         height: 30vh;
-    }
-
-    h1 {
-        font-size: 24px;
     }
 }
 </style>

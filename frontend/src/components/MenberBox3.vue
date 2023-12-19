@@ -147,7 +147,7 @@ export default {
 }
 
 .card .user .toggle::before {
-    content: 'Click me';
+    content: 'Contact me';
 }
 
 .card.active .user .toggle::before {

@@ -34,10 +34,11 @@ export default {
 
 <style>
 html {
-  background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+  background: linear-gradient(to top, rgba(0, 181, 255, 1) 0%, rgba(0, 231, 220, 1) 100%);
 }
 
 .App-Header {
+  height: 3vh;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
