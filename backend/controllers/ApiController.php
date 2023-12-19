@@ -1,5 +1,12 @@
 <?php
 
+
+/**
+ * Team: LFZW,NKU
+ * Coding by LiangXiaochu 2110951
+ * 这个控制器主要用于根据api来调用不同的函数，从而读取特定的表来返回不同的值给前端
+ */
+
 namespace app\controllers;
 
 use yii\web\Controller;

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Team: LFZW,NKU
+ * Coding by LiangXiaochu 2110951
+ * 修改了路由路径，提供了api接口给前端
+ */
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';

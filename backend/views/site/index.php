@@ -1,5 +1,11 @@
 <?php
 
+
+/**
+ * Team: LFZW,NKU
+ * Coding by LiangXiaochu 2110951
+ * 修改了主页样式
+ */
 /** @var yii\web\View $this */
 
 $this->title = 'Yii2后端';
