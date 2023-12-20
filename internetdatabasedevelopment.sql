@@ -20,6 +20,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for articles
 -- ----------------------------
+USE `internetdatabasedevelopment`;
 DROP TABLE IF EXISTS `articles`;
 CREATE TABLE `articles`  (
   `ArticleID` int(11) NOT NULL AUTO_INCREMENT,
