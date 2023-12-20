@@ -1,7 +1,10 @@
 <template>
     <div class="videoPlayer">
         <video id="player" playsinline controls>
-            <source src="../assets/videos/aaa.mp4" type="video/mp4">
+            <!-- <source src="../assets/videos/aaa.mp4" type="video/mp4"> -->
+            <source
+                src="https://vod.cntv.myhwcdn.cn/flash/mp4video63/TMS/2023/07/06/8ac3e3d2e4464d1e8f6d354209be4649_h2642000000nero_aac16.mp4"
+                type="video/mp4">
         </video>
     </div>
 
