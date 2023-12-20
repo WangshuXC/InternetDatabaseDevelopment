@@ -41,11 +41,8 @@ export default {
                 return;
             }
 
-            // 向后端发送登录请求
-            axios.post('http://localhost:8080/api/signup', {
-                username: username,
-                password: password
-            })
+            // 向后端发送注册请求
+            axios.post('http://10.130.26.91:8080/api/signup?username=' + username + "&password=" + password)
                 .then(response => {
                     const status = response.data.status;
                     if (status === 1) {
@@ -67,7 +64,7 @@ export default {
             const password = this.loginData.password;
 
             // 向后端发送登录请求
-            axios.get('http://localhost:8080/api/login?username=' + username + "&password=" + password)
+            axios.get('http://10.130.26.91:8080/api/login?username=' + username + "&password=" + password)
                 .then(response => {
                     const status = response.data.status;
                     if (status === 1) {
@@ -134,7 +131,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("../assets/imgs/bg.png") no-repeat center;
+    background: linear-gradient(to top, rgba(0, 181, 255, 1) 0%, rgba(0, 231, 220, 1) 100%);
     background-size: cover;
 }
 
@@ -155,7 +152,7 @@ body {
     bottom: 0;
     right: 0;
 
-    background: url("../assets/imgs/bcpic.jpg") no-repeat;
+    background: url("../assets/imgs/bcpic1.jpg") no-repeat;
     background-size: cover;
 
     background-position: left bottom;
@@ -280,7 +277,7 @@ body {
 }
 
 .login-box button {
-    background-color: #73634f;
+    background-color: #0d2040;
 }
 
 /* 注册、登录区域收起 */
