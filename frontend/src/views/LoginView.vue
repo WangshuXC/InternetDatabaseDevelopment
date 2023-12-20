@@ -1,5 +1,6 @@
 <script>
 import { ElMessage } from 'element-plus'
+import axios from 'axios';
 export default {
     data() {
         return {
@@ -31,21 +32,66 @@ export default {
             }
         },
         register() {
+            // 获取用户名和密码
+            const username = this.registerData.username;
+            const password = this.registerData.password;
+
             if (this.registerData.password !== this.registerData.confirmPassword) {
                 ElMessage.error('密码和确认密码不一致')
                 return;
             }
+
+            // 向后端发送登录请求
+            axios.post('http://localhost:8080/api/signup', {
+                username: username,
+                password: password
+            })
+                .then(response => {
+                    const status = response.data.status;
+                    if (status === 1) {
+                        this.$message.success('注册成功');
+                    }
+                    else if (status === 0) {
+                        // 注册失败
+                        this.$message.error('用户已存在');
+                    }
+                })
+                .catch(error => {
+                    console.error('登录失败:', error);
+                    this.$message.error('登录失败2');
+                });
         },
         login() {
-            sessionStorage.setItem('Username', this.loginData.username);
-            sessionStorage.setItem('Password', this.loginData.password);
+            // 获取用户名和密码
+            const username = this.loginData.username;
+            const password = this.loginData.password;
 
-            ElMessage.success('登陆成功')
+            // 向后端发送登录请求
+            axios.post('http://localhost:8080/api/login', {
+                username: username,
+                password: password
+            })
+                .then(response => {
+                    const status = response.data.status;
+                    if (status === 1) {
+                        // 登录成功
+                        sessionStorage.setItem('Username', username);
+                        sessionStorage.setItem('Password', password);
+                        this.$message.success('登录成功');
 
-            // 导航到 /home 路径
-            setTimeout(() => {
-                window.location.href = '/';
-            }, 2000);
+                        // 导航到 /home 路径
+                        setTimeout(() => {
+                            window.location.href = '/';
+                        }, 2000);
+                    } else {
+                        // 登录失败
+                        this.$message.error('登录失败1');
+                    }
+                })
+                .catch(error => {
+                    console.error('登录失败:', error);
+                    this.$message.error('登录失败2');
+                });
         }
     }
 };

@@ -43,7 +43,7 @@ class ApiController extends Controller
             }
         }
     }
-    public function actionSignin()
+    public function actionSignup()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 

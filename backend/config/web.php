@@ -2,7 +2,7 @@
 /**
  * Team: LFZW,NKU
  * Coding by LiangXiaochu 2110951
- * 修改了路由路径，提供了api接口给前端
+ * 修改了路由路径，提供了api接口给前端,允许跨域传输
  */
 
 $params = require __DIR__ . '/params.php';
@@ -52,13 +52,22 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'api/login' => 'api/login',
-                'api/signin' => 'api/signin',
+                'api/signup' => 'api/signup',
                 'api/getarticle' => 'api/getarticle',
                 'api/getvideo' => 'api/getvideo',
                 'api/getcomment' => 'api/getcomment',
             ],
         ],
-        
+        'response' => [
+            'format' => yii\web\Response::FORMAT_JSON,
+            'charset' => 'UTF-8',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                $response->headers->set('Access-Control-Allow-Origin', '*');
+                $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+                $response->headers->set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+            },
+        ],
     ],
     'params' => $params,
 ];
