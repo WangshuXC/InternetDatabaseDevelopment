@@ -53,6 +53,7 @@ $config = [
             'rules' => [
                 'api/login' => 'api/login',
                 'api/signup' => 'api/signup',
+                'api/adminlogin' => 'api/adminlogin',
                 'api/getarticle' => 'api/getarticle',
                 'api/getvideo' => 'api/getvideo',
                 'api/getcomment' => 'api/getcomment',
