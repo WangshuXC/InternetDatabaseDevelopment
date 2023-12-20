@@ -8,9 +8,8 @@ use Yii;
  * This is the model class for table "admins".
  *
  * @property int $AdminID
- * @property int $UserID
- *
- * @property Users $user
+ * @property string $Username
+ * @property string $Password
  */
 class Admins extends \yii\db\ActiveRecord
 {
@@ -28,9 +27,10 @@ class Admins extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['UserID'], 'required'],
-            [['UserID'], 'integer'],
-            [['UserID'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['UserID' => 'UserID']],
+            [['Username', 'Password'], 'required'],
+            [['Username'], 'string', 'max' => 50],
+            [['Password'], 'string', 'max' => 100],
+            [['Username'], 'unique'],
         ];
     }
 
@@ -41,17 +41,8 @@ class Admins extends \yii\db\ActiveRecord
     {
         return [
             'AdminID' => 'Admin ID',
-            'UserID' => 'User ID',
+            'Username' => 'Username',
+            'Password' => 'Password',
         ];
-    }
-
-    /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(Users::class, ['UserID' => 'UserID']);
     }
 }

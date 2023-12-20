@@ -17,7 +17,8 @@ class AdminsSearch extends Admins
     public function rules()
     {
         return [
-            [['AdminID', 'UserID'], 'integer'],
+            [['AdminID'], 'integer'],
+            [['Username', 'Password'], 'safe'],
         ];
     }
 
@@ -58,8 +59,10 @@ class AdminsSearch extends Admins
         // grid filtering conditions
         $query->andFilterWhere([
             'AdminID' => $this->AdminID,
-            'UserID' => $this->UserID,
         ]);
+
+        $query->andFilterWhere(['like', 'Username', $this->Username])
+            ->andFilterWhere(['like', 'Password', $this->Password]);
 
         return $dataProvider;
     }

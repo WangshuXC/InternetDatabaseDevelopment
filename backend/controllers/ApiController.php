@@ -11,6 +11,7 @@
  * 增加了视频和评论的api及查找函数actionGetvideo和actionGetcomment
  * 修改了视频和评论的查找api，增加了查询页数
  * 增加了点击量的api
+ * 增加了管理员登录的api
  */
 
 namespace app\controllers;
@@ -82,7 +83,28 @@ class ApiController extends Controller
             }
         }
     }
-
+    public function actionAdminlogin()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    
+        $username = \Yii::$app->request->get('username');
+        $password = \Yii::$app->request->get('password');
+    
+        if ($username !== null && $password !== null) {
+            // 查询数据库检查用户名和密码是否匹配
+            $user = Admins::find()
+                ->where(['Username' => $username])
+                ->one();
+    
+            if ($user !== null && ($password == $user->Password)) {
+                // 用户名和密码匹配
+                return ['status' => 1];
+            } else {
+                // 用户名和密码不匹配
+                return ['status' => 0];
+            }
+        }
+    }
 
 
     public function actionGetarticle()
