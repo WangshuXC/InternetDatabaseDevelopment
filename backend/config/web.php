@@ -20,6 +20,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'JNYqG-lRFV3nWlJn-h56ovmOGnitNP5C',
+            'enableCsrfValidation' => false //今晚的问题主要是这个配置， 解除 cors 令牌，yii有个机制每个请求需要传入cors令牌  ，那这边就先撤了？ok感谢！
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -64,9 +65,10 @@ $config = [
             'charset' => 'UTF-8',
             'on beforeSend' => function ($event) {
                 $response = $event->sender;
-                $response->headers->set('Access-Control-Allow-Origin', '/api');
+                $response->headers->set('Access-Control-Allow-Origin', '*');//这个是设置跨域
                 $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
                 $response->headers->set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+                //$event->sender->headers->remove('Access-Control-Allow-Origin');//这个是删除跨域规则
             },
         ],
     ],

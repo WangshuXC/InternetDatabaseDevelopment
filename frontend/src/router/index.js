@@ -28,8 +28,9 @@ const router = createRouter({
       },
     },
     {
-      path: '/movieplay',
+      path: '/movie/:id',
       name: 'movieplay',
+      props: true,
       component: () => import('../views/MoviePlay.vue'),
       meta: {
         showNavBar: true

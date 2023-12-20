@@ -1,25 +1,28 @@
 <template>
-    <div class="videoPlayer">
-        <video id="player" playsinline controls>
-            <!-- <source src="../assets/videos/aaa.mp4" type="video/mp4"> -->
-            <source
-                src="https://vod.cntv.myhwcdn.cn/flash/mp4video63/TMS/2023/07/06/8ac3e3d2e4464d1e8f6d354209be4649_h2642000000nero_aac16.mp4"
-                type="video/mp4">
-        </video>
-    </div>
+    <div class="videoContainer">
+        <div class="videoPlayer">
+            <video id="player" playsinline controls>
+                <source src="videoSrc" type="video/mp4">
+            </video>
+        </div>
 
-    <div class="videoInfo">
-
+        <div class="videoInfo">
+            <p>{{ videoInfo }}</p>
+        </div>
     </div>
 </template>
 
 <script>
 import Plyr from 'plyr';
 import 'plyr/dist/plyr.css';
+import axios from 'axios';
 
 export default {
     data() {
-        return {};
+        return {
+            videoSrc: '', // Store video source URL
+            videoInfo: '' // Store video information
+        };
     },
     mounted() {
         this.initPlayer();
@@ -31,17 +34,55 @@ export default {
                 speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
             });
         },
+        getUrl() {
+            // 获取用户名和密码
+            const username = this.loginData.username;
+            const password = this.loginData.password;
+
+            // 向后端发送登录请求
+            axios.post('http://localhost:8080/api/login', {
+                username: username,
+                password: password
+            })
+                .then(response => {
+                    const status = response.data.status;
+                })
+                .catch(error => {
+                    console.error('请求数据失败', error);
+                });
+        },
     },
 };
 </script>
 
 <style>
-.videoPlayer {
-    margin-top: 3%;
-    margin-left: 5%;
+.videoContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 6vh;
     max-width: 80%;
     max-height: 80vh;
+}
+
+.videoPlayer {
+    margin-top: 3%;
+
     display: flex;
+    justify-content: center;
+    border-radius: 15px;
+    background-color: aliceblue;
+    padding: 20px;
+}
+
+.videoInfo {
+    display: flex;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    font-size: larger;
+    color: white;
+    background-color: grey;
+    border-radius: 15px;
+    padding: 20px;
     justify-content: center;
 }
 </style>

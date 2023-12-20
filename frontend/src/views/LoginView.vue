@@ -67,10 +67,7 @@ export default {
             const password = this.loginData.password;
 
             // 向后端发送登录请求
-            axios.post('http://localhost:8080/api/login', {
-                username: username,
-                password: password
-            })
+            axios.get('http://localhost:8080/api/login?username=' + username + "&password=" + password)
                 .then(response => {
                     const status = response.data.status;
                     if (status === 1) {
