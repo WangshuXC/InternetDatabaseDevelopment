@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Videos;
-use app\models\VideosSearch;
+use app\models\Admins;
+use app\models\AdminsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * VideosController implements the CRUD actions for Videos model.
+ * AdminsController implements the CRUD actions for Admins model.
  */
-class VideosController extends Controller
+class AdminsController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class VideosController extends Controller
     }
 
     /**
-     * Lists all Videos models.
+     * Lists all Admins models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new VideosSearch();
+        $searchModel = new AdminsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,30 +48,30 @@ class VideosController extends Controller
     }
 
     /**
-     * Displays a single Videos model.
-     * @param int $VideoID Video ID
+     * Displays a single Admins model.
+     * @param int $AdminID Admin ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($VideoID)
+    public function actionView($AdminID)
     {
         return $this->render('view', [
-            'model' => $this->findModel($VideoID),
+            'model' => $this->findModel($AdminID),
         ]);
     }
 
     /**
-     * Creates a new Videos model.
+     * Creates a new Admins model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Videos();
+        $model = new Admins();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'VideoID' => $model->VideoID]);
+                return $this->redirect(['view', 'AdminID' => $model->AdminID]);
             }
         } else {
             $model->loadDefaultValues();
@@ -83,18 +83,18 @@ class VideosController extends Controller
     }
 
     /**
-     * Updates an existing Videos model.
+     * Updates an existing Admins model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $VideoID Video ID
+     * @param int $AdminID Admin ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($VideoID)
+    public function actionUpdate($AdminID)
     {
-        $model = $this->findModel($VideoID);
+        $model = $this->findModel($AdminID);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'VideoID' => $model->VideoID]);
+            return $this->redirect(['view', 'AdminID' => $model->AdminID]);
         }
 
         return $this->render('update', [
@@ -103,29 +103,29 @@ class VideosController extends Controller
     }
 
     /**
-     * Deletes an existing Videos model.
+     * Deletes an existing Admins model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $VideoID Video ID
+     * @param int $AdminID Admin ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($VideoID)
+    public function actionDelete($AdminID)
     {
-        $this->findModel($VideoID)->delete();
+        $this->findModel($AdminID)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Videos model based on its primary key value.
+     * Finds the Admins model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $VideoID Video ID
-     * @return Videos the loaded model
+     * @param int $AdminID Admin ID
+     * @return Admins the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($VideoID)
+    protected function findModel($AdminID)
     {
-        if (($model = Videos::findOne(['VideoID' => $VideoID])) !== null) {
+        if (($model = Admins::findOne(['AdminID' => $AdminID])) !== null) {
             return $model;
         }
 

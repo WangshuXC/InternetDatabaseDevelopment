@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Articles;
+use app\models\Admins;
 
 /**
- * ArticlesSearch represents the model behind the search form of `app\models\Articles`.
+ * AdminsSearch represents the model behind the search form of `app\models\Admins`.
  */
-class ArticlesSearch extends Articles
+class AdminsSearch extends Admins
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,7 @@ class ArticlesSearch extends Articles
     public function rules()
     {
         return [
-            [['ArticleID'], 'integer'],
-            [['Title', 'Content', 'PublicationDate'], 'safe'],
+            [['AdminID', 'UserID'], 'integer'],
         ];
     }
 
@@ -40,7 +39,7 @@ class ArticlesSearch extends Articles
      */
     public function search($params)
     {
-        $query = Articles::find();
+        $query = Admins::find();
 
         // add conditions that should always apply here
 
@@ -58,12 +57,9 @@ class ArticlesSearch extends Articles
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'ArticleID' => $this->ArticleID,
-            'PublicationDate' => $this->PublicationDate,
+            'AdminID' => $this->AdminID,
+            'UserID' => $this->UserID,
         ]);
-
-        $query->andFilterWhere(['like', 'Title', $this->Title])
-            ->andFilterWhere(['like', 'Content', $this->Content]);
 
         return $dataProvider;
     }

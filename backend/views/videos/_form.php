@@ -16,9 +16,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'VideoURL')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'PictureURL')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'UploadDate')->textInput() ?>
+    <?= $form->field($model, 'UploadDate')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'VideoURL')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

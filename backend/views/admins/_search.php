@@ -4,24 +4,20 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\ArticlesSearch $model */
+/** @var app\models\AdminsSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="articles-search">
+<div class="admins-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'ArticleID') ?>
+    <?= $form->field($model, 'AdminID') ?>
 
-    <?= $form->field($model, 'Title') ?>
-
-    <?= $form->field($model, 'Content') ?>
-
-    <?= $form->field($model, 'PublicationDate') ?>
+    <?= $form->field($model, 'UserID') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

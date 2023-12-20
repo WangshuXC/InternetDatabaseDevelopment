@@ -1,11 +1,5 @@
 <?php
 
-
-/**
- * Team: LFZW,NKU
- * Coding by 
- * 
- */
 namespace app\models;
 
 use yii\base\Model;
@@ -24,7 +18,7 @@ class VideosSearch extends Videos
     {
         return [
             [['VideoID'], 'integer'],
-            [['Title', 'Description', 'VideoURL', 'UploadDate'], 'safe'],
+            [['Title', 'Description', 'PictureURL', 'UploadDate', 'VideoURL'], 'safe'],
         ];
     }
 
@@ -65,11 +59,12 @@ class VideosSearch extends Videos
         // grid filtering conditions
         $query->andFilterWhere([
             'VideoID' => $this->VideoID,
-            'UploadDate' => $this->UploadDate,
         ]);
 
         $query->andFilterWhere(['like', 'Title', $this->Title])
             ->andFilterWhere(['like', 'Description', $this->Description])
+            ->andFilterWhere(['like', 'PictureURL', $this->PictureURL])
+            ->andFilterWhere(['like', 'UploadDate', $this->UploadDate])
             ->andFilterWhere(['like', 'VideoURL', $this->VideoURL]);
 
         return $dataProvider;
