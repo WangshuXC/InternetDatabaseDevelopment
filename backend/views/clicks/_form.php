@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\Articles $model */
+/** @var app\models\Clicks $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="articles-form">
+<div class="clicks-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'Title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'ContentID')->textInput() ?>
 
-    <?= $form->field($model, 'Content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'ContentType')->dropDownList([ 'Article' => 'Article', 'Video' => 'Video', ], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'PublicationDate')->textInput() ?>
+    <?= $form->field($model, 'ClickCount')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

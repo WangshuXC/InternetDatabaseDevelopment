@@ -1,11 +1,5 @@
 <?php
 
-
-/**
- * Team: LFZW,NKU
- * Coding by 
- * 
- */
 namespace app\models;
 
 use Yii;
@@ -16,10 +10,7 @@ use Yii;
  * @property int $ArticleID
  * @property string $Title
  * @property string|null $Content
- * @property int $AuthorID
  * @property string|null $PublicationDate
- *
- * @property Users $author
  */
 class Articles extends \yii\db\ActiveRecord
 {
@@ -37,12 +28,10 @@ class Articles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Title', 'AuthorID'], 'required'],
+            [['Title'], 'required'],
             [['Content'], 'string'],
-            [['AuthorID'], 'integer'],
             [['PublicationDate'], 'safe'],
             [['Title'], 'string', 'max' => 255],
-            [['AuthorID'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['AuthorID' => 'UserID']],
         ];
     }
 
@@ -55,18 +44,7 @@ class Articles extends \yii\db\ActiveRecord
             'ArticleID' => 'Article ID',
             'Title' => 'Title',
             'Content' => 'Content',
-            'AuthorID' => 'Author ID',
             'PublicationDate' => 'Publication Date',
         ];
-    }
-
-    /**
-     * Gets query for [[Author]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAuthor()
-    {
-        return $this->hasOne(Users::class, ['UserID' => 'AuthorID']);
     }
 }

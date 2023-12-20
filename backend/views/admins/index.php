@@ -1,24 +1,24 @@
 <?php
 
-use app\models\Articles;
+use app\models\Admins;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var app\models\ArticlesSearch $searchModel */
+/** @var app\models\AdminsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Articles';
+$this->title = 'Admins';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="articles-index">
+<div class="admins-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Articles', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Admins', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,14 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'ArticleID',
-            'Title',
-            'Content:ntext',
-            'PublicationDate',
+            'AdminID',
+            'UserID',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Articles $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'ArticleID' => $model->ArticleID]);
+                'urlCreator' => function ($action, Admins $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'AdminID' => $model->AdminID]);
                  }
             ],
         ],

@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Videos;
-use app\models\VideosSearch;
+use app\models\Clicks;
+use app\models\ClicksSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * VideosController implements the CRUD actions for Videos model.
+ * ClicksController implements the CRUD actions for Clicks model.
  */
-class VideosController extends Controller
+class ClicksController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class VideosController extends Controller
     }
 
     /**
-     * Lists all Videos models.
+     * Lists all Clicks models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new VideosSearch();
+        $searchModel = new ClicksSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,30 +48,30 @@ class VideosController extends Controller
     }
 
     /**
-     * Displays a single Videos model.
-     * @param int $VideoID Video ID
+     * Displays a single Clicks model.
+     * @param int $ClickID Click ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($VideoID)
+    public function actionView($ClickID)
     {
         return $this->render('view', [
-            'model' => $this->findModel($VideoID),
+            'model' => $this->findModel($ClickID),
         ]);
     }
 
     /**
-     * Creates a new Videos model.
+     * Creates a new Clicks model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Videos();
+        $model = new Clicks();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'VideoID' => $model->VideoID]);
+                return $this->redirect(['view', 'ClickID' => $model->ClickID]);
             }
         } else {
             $model->loadDefaultValues();
@@ -83,18 +83,18 @@ class VideosController extends Controller
     }
 
     /**
-     * Updates an existing Videos model.
+     * Updates an existing Clicks model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $VideoID Video ID
+     * @param int $ClickID Click ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($VideoID)
+    public function actionUpdate($ClickID)
     {
-        $model = $this->findModel($VideoID);
+        $model = $this->findModel($ClickID);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'VideoID' => $model->VideoID]);
+            return $this->redirect(['view', 'ClickID' => $model->ClickID]);
         }
 
         return $this->render('update', [
@@ -103,29 +103,29 @@ class VideosController extends Controller
     }
 
     /**
-     * Deletes an existing Videos model.
+     * Deletes an existing Clicks model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $VideoID Video ID
+     * @param int $ClickID Click ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($VideoID)
+    public function actionDelete($ClickID)
     {
-        $this->findModel($VideoID)->delete();
+        $this->findModel($ClickID)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Videos model based on its primary key value.
+     * Finds the Clicks model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $VideoID Video ID
-     * @return Videos the loaded model
+     * @param int $ClickID Click ID
+     * @return Clicks the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($VideoID)
+    protected function findModel($ClickID)
     {
-        if (($model = Videos::findOne(['VideoID' => $VideoID])) !== null) {
+        if (($model = Clicks::findOne(['ClickID' => $ClickID])) !== null) {
             return $model;
         }
 
