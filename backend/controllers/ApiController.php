@@ -9,6 +9,8 @@
  * 
  * Coding by fangyi 2112106
  * 增加了视频和评论的api及查找函数actionGetvideo和actionGetcomment
+ * 修改了视频和评论的查找api，增加了查询页数
+ * 增加了点击量的api
  */
 
 namespace app\controllers;
@@ -18,6 +20,9 @@ use app\models\Users;
 use app\models\Articles;
 use app\models\Videos;
 use app\models\Comments;
+use app\models\Admins;
+use app\models\Clicks;
+
 
 class ApiController extends Controller
 {
@@ -84,8 +89,12 @@ class ApiController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        // 查询数据库获取文章信息
-        $articles = Articles::find()->select(['ArticleID', 'Title', 'Content'])->all();
+        // 获取页数
+        $page = \Yii::$app->request->get('page');
+        $intpage = (int)$page;
+
+        // 查询数据库获取对应页数的文章信息
+        $articles = Articles::find()->select(['ArticleID', 'Title', 'Content', 'PublicationDate	'])->offset(15*($intpage-1))->limit(15)->all();
 
         // 格式化为 JSON 并返回
         return $articles;
@@ -94,8 +103,12 @@ class ApiController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
+        // 获取页数
+        $page = \Yii::$app->request->get('page');
+        $intpage = (int)$page;
+
         // 查询数据库获取视频信息
-        $videos = Videos::find()->select(['VideoID', 'Title', 'Description', 'VideoURL', 'UploadDate'])->all();
+        $videos = Videos::find()->select(['VideoID', 'Title', 'Description', 'PictureURL', 'UploadDate', 'VideoURL'])->offset(18*($intpage-1))->limit(18)->all();
 
         // 格式化为 JSON 并返回
         return $videos;
@@ -104,10 +117,20 @@ class ApiController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        // 查询数据库获取视频信息
+        // 查询数据库获取评论信息
         $comments = Comments::find()->select(['CommentID', 'UserID', 'VideoID', 'Comment', 'CommentDate'])->all();
 
         // 格式化为 JSON 并返回
         return $comments;
+    }
+    public function actionGetclick()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        // 查询数据库获取点击量信息
+        $clicks = Clicks::find()->select(['ClickID', 'ContentID', 'ContentType', 'ClickCount'])->all();
+
+        // 格式化为 JSON 并返回
+        return $clicks;
     }
 }
