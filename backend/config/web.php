@@ -53,6 +53,8 @@ $config = [
             'rules' => [
                 'api/getuser' => 'api/getuser',
                 'api/getarticle' => 'api/getarticle',
+                'api/getvideo' => 'api/getvideo',
+                'api/getcomment' => 'api/getcomment',
             ],
         ],
         
