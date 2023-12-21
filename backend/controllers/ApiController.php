@@ -12,6 +12,7 @@
  * 修改了视频和评论的查找api，增加了查询页数
  * 增加了点击量的api
  * 增加了管理员登录的api
+ * 更新了管理员登录的api
  */
 
 namespace app\controllers;
@@ -92,13 +93,21 @@ class ApiController extends Controller
     
         if ($username !== null && $password !== null) {
             // 查询数据库检查用户名和密码是否匹配
-            $user = Admins::find()
+            $user = Users::find()
                 ->where(['Username' => $username])
                 ->one();
     
             if ($user !== null && ($password == $user->Password)) {
                 // 用户名和密码匹配
-                return ['status' => 1];
+                // 检查用户是否为管理员
+                $admin = Admins::find()
+                    ->where(['UserID' => $user->UserID])
+                    ->one();
+                if($admin !== null){
+                    return ['status' => 1];
+                }else{
+                    return ['status' => 0];
+                }
             } else {
                 // 用户名和密码不匹配
                 return ['status' => 0];
