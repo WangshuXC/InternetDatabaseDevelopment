@@ -58,7 +58,7 @@ export default {
     flex-direction: row;
     justify-content: center;
 
-    background-color: gainsboro;
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 15px;
 
     width: 90%;

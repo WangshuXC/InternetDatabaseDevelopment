@@ -164,9 +164,6 @@ class ApiController extends Controller
             $comments = Comments::find()->select(['CommentID', 'UserID', 'VideoID', 'Comment', 'CommentDate'])->all();
         }
 
-        // 查询数据库获取评论信息
-        $comments = Comments::find()->select(['CommentID', 'UserID', 'VideoID', 'Comment', 'CommentDate'])->all();
-
         // 格式化为 JSON 并返回
         return $comments;
     }
