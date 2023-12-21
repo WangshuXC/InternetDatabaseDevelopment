@@ -1,11 +1,5 @@
 <?php
 
-
-/**
- * Team: LFZW,NKU
- * Coding by 
- * 
- */
 namespace app\models;
 
 use yii\base\Model;
@@ -23,8 +17,8 @@ class CommentsSearch extends Comments
     public function rules()
     {
         return [
-            [['CommentID', 'UserID', 'VideoID'], 'integer'],
-            [['Comment', 'CommentDate'], 'safe'],
+            [['CommentID', 'VideoID'], 'integer'],
+            [['Comment', 'CommentDate', 'Username'], 'safe'],
         ];
     }
 
@@ -65,12 +59,12 @@ class CommentsSearch extends Comments
         // grid filtering conditions
         $query->andFilterWhere([
             'CommentID' => $this->CommentID,
-            'UserID' => $this->UserID,
             'VideoID' => $this->VideoID,
             'CommentDate' => $this->CommentDate,
         ]);
 
-        $query->andFilterWhere(['like', 'Comment', $this->Comment]);
+        $query->andFilterWhere(['like', 'Comment', $this->Comment])
+            ->andFilterWhere(['like', 'Username', $this->Username]);
 
         return $dataProvider;
     }

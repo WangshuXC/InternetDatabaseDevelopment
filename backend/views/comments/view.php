@@ -30,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'CommentID',
-            'UserID',
             'VideoID',
             'Comment:ntext',
             'CommentDate',
+            'Username',
         ],
     ]) ?>
 

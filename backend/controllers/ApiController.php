@@ -15,6 +15,7 @@
  * 增加了点击量的api
  * 增加了管理员登录的api
  * 更新了管理员登录的api
+ * 增加了发布评论的api
  */
 
 namespace app\controllers;
@@ -158,10 +159,10 @@ class ApiController extends Controller
         $vid = \Yii::$app->request->get('vid');
         if ($vid !== null) {
             // 如果有 vid 参数，则查询指定 VideoID 的视频信息
-            $comments = Comments::find()->select(['CommentID', 'UserID', 'VideoID', 'Comment', 'CommentDate'])->where(['VideoID' => $vid])->all();
+            $comments = Comments::find()->select(['CommentID', 'VideoID', 'Comment', 'CommentDate', 'Username'])->where(['VideoID' => $vid])->all();
         } else {
             // 否则按照原来的逻辑查询分页数据
-            $comments = Comments::find()->select(['CommentID', 'UserID', 'VideoID', 'Comment', 'CommentDate'])->all();
+            $comments = Comments::find()->select(['CommentID', 'VideoID', 'Comment', 'CommentDate', 'Username'])->all();
         }
 
         // 格式化为 JSON 并返回
@@ -176,5 +177,25 @@ class ApiController extends Controller
 
         // 格式化为 JSON 并返回
         return $clicks;
+    }
+
+    public function actionAddcomment()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $username = \Yii::$app->request->get('username');
+        $comment = \Yii::$app->request->get('comment');
+        $videoID = \Yii::$app->request->get('videoID');
+
+        $comments = new Comments();
+        $comments->Username = $username;
+        $comments->Comment = $comment;
+        $comments->VideoID = $videoID;
+
+        if ($comments->save()) {
+            return ['status' => 1, 'message' => '发布评论成功'];
+        } else {
+            return ['status' => -1, 'message' => '发布评论失败'];
+        }
     }
 }

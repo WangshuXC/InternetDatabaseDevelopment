@@ -59,6 +59,7 @@ $config = [
                 'api/getvideo' => 'api/getvideo',
                 'api/getcomment' => 'api/getcomment',
                 'api/getclick' => 'api/getclick',
+                'api/addcomment' => 'api/addcomment'
             ],
         ],
         'response' => [
