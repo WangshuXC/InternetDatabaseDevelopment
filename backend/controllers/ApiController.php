@@ -6,12 +6,15 @@
  * Coding by LiangXiaochu 2110951
  * 创建了这个主要用于根据api来调用不同的函数的控制器，从而读取特定的表来返回不同的值给前端，为其他组员提供模板
  * 增加了用于注册和登录的api
+ * 修改了评论查找的api，能够查找特定视频的评论
+ * 修改了视频查找的api，能够根据VideoID获取视频信息
  * 
- * Coding by fangyi 2112106
+ * Coding by FangYi 2112106
  * 增加了视频和评论的api及查找函数actionGetvideo和actionGetcomment
  * 修改了视频和评论的查找api，增加了查询页数
  * 增加了点击量的api
  * 增加了管理员登录的api
+ * 更新了管理员登录的api
  */
 
 namespace app\controllers;
@@ -92,13 +95,21 @@ class ApiController extends Controller
     
         if ($username !== null && $password !== null) {
             // 查询数据库检查用户名和密码是否匹配
-            $user = Admins::find()
+            $user = Users::find()
                 ->where(['Username' => $username])
                 ->one();
     
             if ($user !== null && ($password == $user->Password)) {
                 // 用户名和密码匹配
-                return ['status' => 1];
+                // 检查用户是否为管理员
+                $admin = Admins::find()
+                    ->where(['UserID' => $user->UserID])
+                    ->one();
+                if($admin !== null){
+                    return ['status' => 1];
+                }else{
+                    return ['status' => 0];
+                }
             } else {
                 // 用户名和密码不匹配
                 return ['status' => 0];
@@ -128,9 +139,15 @@ class ApiController extends Controller
         // 获取页数
         $page = \Yii::$app->request->get('page');
         $intpage = (int)$page;
+        $id = \Yii::$app->request->get('id');
 
-        // 查询数据库获取视频信息
-        $videos = Videos::find()->select(['VideoID', 'Title', 'Description', 'PictureURL', 'UploadDate', 'VideoURL'])->offset(18*($intpage-1))->limit(18)->all();
+        if ($id !== null) {
+            // 如果有 id 参数，则查询指定 VideoID 的视频信息
+            $videos = Videos::find()->select(['VideoID', 'Title', 'Description', 'PictureURL', 'UploadDate', 'VideoURL'])->where(['VideoID' => $id])->one();
+        } else {
+            // 否则按照原来的逻辑查询分页数据
+            $videos = Videos::find()->select(['VideoID', 'Title', 'Description', 'PictureURL', 'UploadDate', 'VideoURL'])->offset(18 * ($intpage - 1))->limit(18)->all();
+        }
 
         // 格式化为 JSON 并返回
         return $videos;
@@ -138,6 +155,14 @@ class ApiController extends Controller
     public function actionGetcomment()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $vid = \Yii::$app->request->get('vid');
+        if ($vid !== null) {
+            // 如果有 vid 参数，则查询指定 VideoID 的视频信息
+            $comments = Comments::find()->select(['CommentID', 'UserID', 'VideoID', 'Comment', 'CommentDate'])->where(['VideoID' => $vid])->all();
+        } else {
+            // 否则按照原来的逻辑查询分页数据
+            $comments = Comments::find()->select(['CommentID', 'UserID', 'VideoID', 'Comment', 'CommentDate'])->all();
+        }
 
         // 查询数据库获取评论信息
         $comments = Comments::find()->select(['CommentID', 'UserID', 'VideoID', 'Comment', 'CommentDate'])->all();

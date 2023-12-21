@@ -2,12 +2,30 @@
     <div class="videoContainer">
         <div class="videoPlayer">
             <video id="player" playsinline controls>
-                <source src="videoSrc" type="video/mp4">
+                <source src="" type="video/mp4">
             </video>
         </div>
 
         <div class="videoInfo">
             <p>{{ videoInfo }}</p>
+        </div>
+
+        <div class="CommentContainer">
+            <div class="CommentForm">
+                <textarea v-model="message" placeholder="留言内容"></textarea>
+                <button id="submitBtn" @click="submitMessage">留言</button>
+            </div>
+            <div id="messageBoard">
+                <div v-for="(msg, index) in messages" :key="index" class="message">
+                    <div class="message-info">
+                        <div class="info">
+                            <strong>{{ msg.UserID }}</strong>
+                        </div>
+                        <span>发布于: {{ msg.CommentDate }}</span>
+                    </div>
+                    <div class="content">{{ msg.Comment }}</div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -20,12 +38,28 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            videoSrc: '', // Store video source URL
-            videoInfo: '' // Store video information
-        };
+            videoSrc: '',
+            videoInfo: '',
+            messages: [
+                {
+                    username: 'lxc',
+                    timestamp: '2023/11/07 08:00:00',
+                    content: '这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例这是一条留言内容的示例'
+                },
+                {
+                    username: 'lxc2',
+                    timestamp: '2023/11/07 08:00:00',
+                    content: '这是二条留言内容的示例'
+                },
+            ]
+        }
+    },
+    components: {
     },
     mounted() {
         this.initPlayer();
+        this.getUrl();
+        this.getComments();
     },
     methods: {
         initPlayer() {
@@ -35,22 +69,28 @@ export default {
             });
         },
         getUrl() {
-            // 获取用户名和密码
-            const username = this.loginData.username;
-            const password = this.loginData.password;
-
+            const id = this.$route.params.id;
             // 向后端发送登录请求
-            axios.post('http://localhost:8080/api/login', {
-                username: username,
-                password: password
-            })
+            axios.post('http://10.130.26.91:8080/api/getvideo?id=' + id)
                 .then(response => {
-                    const status = response.data.status;
+                    this.videoSrc = response.data.VideoURL;
+                    this.videoInfo = response.data.Description;
+                    this.player.source = { type: 'video', sources: [{ src: this.videoSrc, type: 'video/mp4' }] };
                 })
                 .catch(error => {
                     console.error('请求数据失败', error);
                 });
         },
+        getComments() {
+            const id = this.$route.params.id;
+            axios.post('http://10.130.26.91:8080/api/getcomment?vid=' + id)
+                .then(response => {
+                    this.messages = response.data;
+                })
+                .catch(error => {
+                    console.error('请求数据失败', error);
+                });
+        }
     },
 };
 </script>
@@ -61,7 +101,7 @@ export default {
     flex-direction: column;
     margin-top: 6vh;
     max-width: 80%;
-    max-height: 80vh;
+    align-items: center;
 }
 
 .videoPlayer {
@@ -79,10 +119,107 @@ export default {
     margin-top: 5vh;
     margin-bottom: 5vh;
     font-size: larger;
-    color: white;
-    background-color: grey;
+    color: rgb(0, 0, 0);
+    background-color: rgba(255, 254, 254, 0.7);
     border-radius: 15px;
     padding: 20px;
     justify-content: center;
+    width: 100%;
+}
+
+.CommentContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(240, 248, 255, 0.7);
+    border-radius: 15px;
+    width: 100%;
+    height: auto;
+}
+
+.CommentForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 4vh;
+}
+
+.CommentForm textarea {
+    border: none;
+    outline: none;
+    color: #000;
+    margin-bottom: 4vh;
+    font: 800 20px '';
+    border-radius: 10px;
+    padding: 30px;
+    width: 90%;
+    resize: vertical;
+}
+
+#submitBtn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(#00e5dd 0%, #00b8fc 100%);
+    color: white;
+    border: none;
+    font-size: 3vh;
+    letter-spacing: 5px;
+    width: 10vw;
+    height: 5vh;
+    border-radius: 50PX;
+}
+
+#messageBoard {
+    width: 90%;
+    text-align: left;
+}
+
+.message {
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+    opacity: 1;
+    animation: messageFadeIn 0.5s ease forwards;
+    /* background-image: linear-gradient(90deg, #8ec5fc 0%, #e0c3fc 100%); */
+    background-color: #fff;
+    margin: 70px 0;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px #00000026;
+    text-shadow: 0px 0px 20px #ffffff;
+}
+
+.message-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2vh;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.message-info strong {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.message-info span {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.content {
+    font-size: 2vh;
+    margin-top: 5vh;
+    margin-inline: 2vw;
+    margin-bottom: 2vh;
+    width: 95%;
 }
 </style>

@@ -3,7 +3,24 @@
 export default {
     data() {
         return {
-            imagePaths: ["src/assets/imgs/1.png", "src/assets/imgs/2.png", "src/assets/imgs/3.png"], // Initialize an empty array to store image paths
+            imagePaths: [
+                "src/assets/imgs/1.png",
+                "src/assets/imgs/2.png",
+                "src/assets/imgs/3.png",
+                "src/assets/imgs/4.png",
+                "src/assets/imgs/5.png",
+                "src/assets/imgs/6.png",
+                "src/assets/imgs/7.png",
+                "src/assets/imgs/8.png",
+                "src/assets/imgs/9.png",
+                "src/assets/imgs/10.png",
+                "src/assets/imgs/11.png",
+                "src/assets/imgs/12.png",
+                "src/assets/imgs/13.png",
+                "src/assets/imgs/14.png",
+                "src/assets/imgs/15.png",
+                "src/assets/imgs/16.png"
+            ]
         };
     },
     mounted() {
@@ -15,7 +32,7 @@ export default {
     <div class="homeContainer">
         <div class="timeLine">
             <h1>核污染宣传，从你我做起</h1>
-            <el-carousel :interval="3000" type="card" height="40vh" indicator-position="none">
+            <el-carousel :interval="3000" type="card" height="50vh" trigger="click">
                 <el-carousel-item v-for="(imagePath, index) in imagePaths" :key="index">
                     <img :src="imagePath" alt="pic">
                 </el-carousel-item>
@@ -27,7 +44,7 @@ export default {
 
 <style>
 .homeContainer {
-    width: 80%;
+    width: 90%;
     height: 65vh;
     margin-top: 10vh;
 }
@@ -35,5 +52,11 @@ export default {
 .timeLine h1 {
     color: white;
     justify-content: center;
+}
+
+.timeLine img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 </style>
