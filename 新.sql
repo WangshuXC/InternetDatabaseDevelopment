@@ -103,15 +103,15 @@ DROP TABLE IF EXISTS `comments`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comments` (
   `CommentID` int NOT NULL AUTO_INCREMENT,
-  `UserID` int NOT NULL,
   `VideoID` int NOT NULL,
   `Comment` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `CommentDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `Username` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   PRIMARY KEY (`CommentID`) USING BTREE,
-  KEY `UserID` (`UserID`) USING BTREE,
   KEY `VideoID` (`VideoID`) USING BTREE,
-  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`VideoID`) REFERENCES `videos` (`VideoID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  KEY `fk_comments_username` (`Username`),
+  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`VideoID`) REFERENCES `videos` (`VideoID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_comments_username` FOREIGN KEY (`Username`) REFERENCES `users` (`Username`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -187,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-21 17:46:11
+-- Dump completed on 2023-12-22  0:04:21
