@@ -2,12 +2,15 @@
     <div class="videoContainer">
         <div class="videoPlayer">
             <video id="player" playsinline controls>
-                <source src="videoSrc" type="video/mp4">
+                <source src="" type="video/mp4">
             </video>
         </div>
 
         <div class="videoInfo">
             <p>{{ videoInfo }}</p>
+        </div>
+
+        <div class="CommentContainer">
         </div>
     </div>
 </template>
@@ -20,12 +23,15 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            videoSrc: '', // Store video source URL
-            videoInfo: '' // Store video information
-        };
+            videoSrc: '',
+            videoInfo: ''
+        }
+    },
+    components: {
     },
     mounted() {
         this.initPlayer();
+        this.getUrl();
     },
     methods: {
         initPlayer() {
@@ -35,17 +41,13 @@ export default {
             });
         },
         getUrl() {
-            // 获取用户名和密码
-            const username = this.loginData.username;
-            const password = this.loginData.password;
-
+            const id = this.$route.params.id;
             // 向后端发送登录请求
-            axios.post('http://localhost:8080/api/login', {
-                username: username,
-                password: password
-            })
+            axios.post('http://10.130.26.91:8080/api/getvideo?id=' + id)
                 .then(response => {
-                    const status = response.data.status;
+                    this.videoSrc = response.data.VideoURL;
+                    this.videoInfo = response.data.Description;
+                    this.player.source = { type: 'video', sources: [{ src: this.videoSrc, type: 'video/mp4' }] };
                 })
                 .catch(error => {
                     console.error('请求数据失败', error);
@@ -61,7 +63,6 @@ export default {
     flex-direction: column;
     margin-top: 6vh;
     max-width: 80%;
-    max-height: 80vh;
 }
 
 .videoPlayer {
@@ -84,5 +85,11 @@ export default {
     border-radius: 15px;
     padding: 20px;
     justify-content: center;
+}
+
+.CommentContainer {
+    display: flex;
+    width: 100%;
+    height: auto;
 }
 </style>

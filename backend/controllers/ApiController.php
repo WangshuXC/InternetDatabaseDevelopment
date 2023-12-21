@@ -137,9 +137,15 @@ class ApiController extends Controller
         // 获取页数
         $page = \Yii::$app->request->get('page');
         $intpage = (int)$page;
+        $id = \Yii::$app->request->get('id');
 
-        // 查询数据库获取视频信息
-        $videos = Videos::find()->select(['VideoID', 'Title', 'Description', 'PictureURL', 'UploadDate', 'VideoURL'])->offset(18*($intpage-1))->limit(18)->all();
+        if ($id !== null) {
+            // 如果有 id 参数，则查询指定 VideoID 的视频信息
+            $videos = Videos::find()->select(['VideoID', 'Title', 'Description', 'PictureURL', 'UploadDate', 'VideoURL'])->where(['VideoID' => $id])->one();
+        } else {
+            // 否则按照原来的逻辑查询分页数据
+            $videos = Videos::find()->select(['VideoID', 'Title', 'Description', 'PictureURL', 'UploadDate', 'VideoURL'])->offset(18 * ($intpage - 1))->limit(18)->all();
+        }
 
         // 格式化为 JSON 并返回
         return $videos;

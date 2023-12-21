@@ -30,7 +30,10 @@ export default {
         synopsis: {
             type: String,
             required: true
-        }
+        },
+    },
+    mounted() {
+        console.log(this.title)
     }
 }
 </script>
