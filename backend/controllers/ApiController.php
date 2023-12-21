@@ -6,8 +6,10 @@
  * Coding by LiangXiaochu 2110951
  * 创建了这个主要用于根据api来调用不同的函数的控制器，从而读取特定的表来返回不同的值给前端，为其他组员提供模板
  * 增加了用于注册和登录的api
+ * 修改了评论查找的api，能够查找特定视频的评论
+ * 修改了视频查找的api，能够根据VideoID获取视频信息
  * 
- * Coding by fangyi 2112106
+ * Coding by FangYi 2112106
  * 增加了视频和评论的api及查找函数actionGetvideo和actionGetcomment
  * 修改了视频和评论的查找api，增加了查询页数
  * 增加了点击量的api
@@ -153,6 +155,14 @@ class ApiController extends Controller
     public function actionGetcomment()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $vid = \Yii::$app->request->get('vid');
+        if ($vid !== null) {
+            // 如果有 vid 参数，则查询指定 VideoID 的视频信息
+            $comments = Comments::find()->select(['CommentID', 'UserID', 'VideoID', 'Comment', 'CommentDate'])->where(['VideoID' => $vid])->all();
+        } else {
+            // 否则按照原来的逻辑查询分页数据
+            $comments = Comments::find()->select(['CommentID', 'UserID', 'VideoID', 'Comment', 'CommentDate'])->all();
+        }
 
         // 查询数据库获取评论信息
         $comments = Comments::find()->select(['CommentID', 'UserID', 'VideoID', 'Comment', 'CommentDate'])->all();
