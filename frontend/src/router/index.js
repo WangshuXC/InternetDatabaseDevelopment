@@ -39,9 +39,17 @@ const router = createRouter({
       },
     },
     {
-      path: '/artical',
-      name: 'artical',
-      component: () => import('../views/ArticalView.vue'),
+      path: '/article',
+      name: 'article',
+      component: () => import('../views/ArticleView.vue'),
+      meta: {
+        showNavBar: true
+      },
+    },
+    {
+      path: '/article/:id',
+      name: 'articleplay',
+      component: () => import('../views/ArticlePlay.vue'),
       meta: {
         showNavBar: true
       },

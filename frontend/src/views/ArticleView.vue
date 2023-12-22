@@ -3,17 +3,28 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            articalList: [
-                { id: 1, title: 'artical1', content: 'aaaaaaaa1', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
+            articleList: [
             ]
         }
     },
+    mounted() {
+        this.getUrl();
+    },
     methods: {
+        getUrl() {
+            axios.post('http://10.130.26.91:8080/api/getarticle')
+                .then(response => {
+                    this.articleList = response.data;
+                })
+                .catch(error => {
+                    console.error('请求失败', error);
+                });
+        },
         handlePageChange(page) {
-            axios.post('http://10.130.26.91:8080/api/getvideo?page=' + page)
+            axios.post('http://10.130.26.91:8080/api/getarticle?page=' + page)
                 .then(response => {
                     const elBacktop = document.querySelector('.el-backtop');
-                    this.movieList = response.data;
+                    this.articleList = response.data;
                     elBacktop.click();
                 })
                 .catch(error => {
@@ -25,20 +36,15 @@ export default {
 </script>
 
 <template>
-    <div class="articalContainner">
-        <div class="articalBox">
-            <div v-for="item in  articalList " :key="item.id" class="articalItem">
-                <h2>{{ item.title }}</h2>
-                <div class="info">
-                    <div class="picBox">
-                        <el-image style="width: auto; height: auto" :src=item.picurl :fit="contain" />
-                    </div>
-                    <div class="contentBox">
-                        <p>{{ item.content }}</p>
-                    </div>
-                </div>
+    <div class="articleContainner">
+        <div class="articleBox">
+            <div v-for="item in articleList" :key="item.ArticleID" class="articleItem">
+                <router-link :to="'/article/' + item.ArticleID">
+                    <h2>{{ item.Title }}</h2>
+                    <!-- <div class="contentBox" v-html="item.Content" /> -->
+                </router-link>
             </div>
-            <el-pagination background layout="prev, pager, next" :total="60" hide-on-single-page
+            <el-pagination background layout="prev, pager, next" :total="40" hide-on-single-page
                 @current-change="handlePageChange" />
         </div>
     </div>
@@ -47,7 +53,7 @@ export default {
 
 
 <style>
-.articalContainner {
+.articleContainner {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -57,7 +63,7 @@ export default {
     height: auto;
 }
 
-.articalBox {
+.articleBox {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -71,21 +77,27 @@ export default {
     padding: 30px;
 }
 
-.articalItem {
+.articleItem {
     background-color: rgb(255, 255, 255);
     border-radius: 15px;
+    justify-content: center;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 20px;
     width: 90%;
-    height: 200px;
+    height: auto;
     margin: 20px 30px;
 }
 
-.articalItem h2 {
+.articleItem a {
+    text-decoration: none;
+}
+
+.articleItem h2 {
     margin-top: 0;
     margin-bottom: 10px;
+    color: black;
 }
 
 .info {
@@ -93,17 +105,6 @@ export default {
 
     width: 100%;
     height: 80%;
-}
-
-.picBox {
-    display: flex;
-    height: 100%;
-    width: auto;
-}
-
-.picBox img {
-    display: flex;
-    border-radius: 15px;
 }
 
 .contentBox {

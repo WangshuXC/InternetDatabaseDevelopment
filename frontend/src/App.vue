@@ -16,7 +16,7 @@
 <script>
 import NavBar from './components/NavBar.vue';
 import WaveFoot from './components/WaveFoot.vue';
-
+import axios from 'axios';
 export default {
   name: 'App',
   components: {
@@ -29,8 +29,21 @@ export default {
 
       return !meta || meta.showNavBar !== false;
     },
-
   },
+  mounted() {
+    this.AddWebView()
+  },
+  methods: {
+    AddWebView() {
+      axios.post('http://10.130.26.91:8080/api/addwebviews')
+        .then(response => {
+
+        })
+        .catch(error => {
+          console.error('浏览量增加失败失败', error);
+        });
+    }
+  }
 }
 </script>
 
