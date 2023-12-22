@@ -43,13 +43,13 @@ LOCK TABLES `admins` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `article comments`
+-- Table structure for table `articlecomments`
 --
 
-DROP TABLE IF EXISTS `article comments`;
+DROP TABLE IF EXISTS `articlecomments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `article comments` (
+CREATE TABLE `articlecomments` (
   `CommentID` int NOT NULL AUTO_INCREMENT,
   `ArticleID` int NOT NULL,
   `Comment` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
@@ -64,12 +64,12 @@ CREATE TABLE `article comments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `article comments`
+-- Dumping data for table `articlecomments`
 --
 
-LOCK TABLES `article comments` WRITE;
-/*!40000 ALTER TABLE `article comments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `article comments` ENABLE KEYS */;
+LOCK TABLES `articlecomments` WRITE;
+/*!40000 ALTER TABLE `articlecomments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `articlecomments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -177,13 +177,13 @@ INSERT INTO `users` VALUES (1,'1','1'),(2,'2','2'),(3,'3','3');
 UNLOCK TABLES;
 
 --
--- Table structure for table `video comments`
+-- Table structure for table `videocomments`
 --
 
-DROP TABLE IF EXISTS `video comments`;
+DROP TABLE IF EXISTS `videocomments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `video comments` (
+CREATE TABLE `videocomments` (
   `CommentID` int NOT NULL AUTO_INCREMENT,
   `VideoID` int NOT NULL,
   `Comment` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
@@ -198,12 +198,12 @@ CREATE TABLE `video comments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `video comments`
+-- Dumping data for table `videocomments`
 --
 
-LOCK TABLES `video comments` WRITE;
-/*!40000 ALTER TABLE `video comments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `video comments` ENABLE KEYS */;
+LOCK TABLES `videocomments` WRITE;
+/*!40000 ALTER TABLE `videocomments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `videocomments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -265,4 +265,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-22 19:36:04
+-- Dump completed on 2023-12-22 19:40:09
