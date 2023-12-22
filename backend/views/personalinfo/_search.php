@@ -4,20 +4,26 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\AdminsSearch $model */
+/** @var app\models\PersonalinfoSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="admins-search">
+<div class="personalinfo-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'AdminID') ?>
+    <?= $form->field($model, 'Name') ?>
 
-    <?= $form->field($model, 'Username') ?>
+    <?= $form->field($model, 'AvatarURL') ?>
+
+    <?= $form->field($model, 'Email') ?>
+
+    <?= $form->field($model, 'GitHubAccount') ?>
+
+    <?= $form->field($model, 'WeChatID') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

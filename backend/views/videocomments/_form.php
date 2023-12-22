@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\Comments $model */
+/** @var app\models\Videocomments $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="comments-form">
+<div class="videocomments-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

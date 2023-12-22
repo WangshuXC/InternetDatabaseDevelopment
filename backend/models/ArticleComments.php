@@ -5,25 +5,25 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "comments".
+ * This is the model class for table "articlecomments".
  *
  * @property int $CommentID
- * @property int $VideoID
+ * @property int $ArticleID
  * @property string $Comment
  * @property string|null $CommentDate
  * @property string $Username
  *
+ * @property Articles $article
  * @property Users $username
- * @property Videos $video
  */
-class Comments extends \yii\db\ActiveRecord
+class Articlecomments extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'comments';
+        return 'articlecomments';
     }
 
     /**
@@ -32,12 +32,12 @@ class Comments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['VideoID', 'Comment', 'Username'], 'required'],
-            [['VideoID'], 'integer'],
+            [['ArticleID', 'Comment', 'Username'], 'required'],
+            [['ArticleID'], 'integer'],
             [['Comment'], 'string'],
             [['CommentDate'], 'safe'],
             [['Username'], 'string', 'max' => 50],
-            [['VideoID'], 'exist', 'skipOnError' => true, 'targetClass' => Videos::class, 'targetAttribute' => ['VideoID' => 'VideoID']],
+            [['ArticleID'], 'exist', 'skipOnError' => true, 'targetClass' => Articles::class, 'targetAttribute' => ['ArticleID' => 'ArticleID']],
             [['Username'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['Username' => 'Username']],
         ];
     }
@@ -49,11 +49,21 @@ class Comments extends \yii\db\ActiveRecord
     {
         return [
             'CommentID' => 'Comment ID',
-            'VideoID' => 'Video ID',
+            'ArticleID' => 'Article ID',
             'Comment' => 'Comment',
             'CommentDate' => 'Comment Date',
             'Username' => 'Username',
         ];
+    }
+
+    /**
+     * Gets query for [[Article]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticle()
+    {
+        return $this->hasOne(Articles::class, ['ArticleID' => 'ArticleID']);
     }
 
     /**
@@ -64,15 +74,5 @@ class Comments extends \yii\db\ActiveRecord
     public function getUsername()
     {
         return $this->hasOne(Users::class, ['Username' => 'Username']);
-    }
-
-    /**
-     * Gets query for [[Video]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getVideo()
-    {
-        return $this->hasOne(Videos::class, ['VideoID' => 'VideoID']);
     }
 }

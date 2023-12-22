@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Comments;
-use app\models\CommentsSearch;
+use app\models\Videocomments;
+use app\models\VideocommentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CommentsController implements the CRUD actions for Comments model.
+ * VideocommentsController implements the CRUD actions for Videocomments model.
  */
-class CommentsController extends Controller
+class VideocommentsController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class CommentsController extends Controller
     }
 
     /**
-     * Lists all Comments models.
+     * Lists all Videocomments models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new CommentsSearch();
+        $searchModel = new VideocommentsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class CommentsController extends Controller
     }
 
     /**
-     * Displays a single Comments model.
+     * Displays a single Videocomments model.
      * @param int $CommentID Comment ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class CommentsController extends Controller
     }
 
     /**
-     * Creates a new Comments model.
+     * Creates a new Videocomments model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Comments();
+        $model = new Videocomments();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class CommentsController extends Controller
     }
 
     /**
-     * Updates an existing Comments model.
+     * Updates an existing Videocomments model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $CommentID Comment ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class CommentsController extends Controller
     }
 
     /**
-     * Deletes an existing Comments model.
+     * Deletes an existing Videocomments model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $CommentID Comment ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class CommentsController extends Controller
     }
 
     /**
-     * Finds the Comments model based on its primary key value.
+     * Finds the Videocomments model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $CommentID Comment ID
-     * @return Comments the loaded model
+     * @return Videocomments the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($CommentID)
     {
-        if (($model = Comments::findOne(['CommentID' => $CommentID])) !== null) {
+        if (($model = Videocomments::findOne(['CommentID' => $CommentID])) !== null) {
             return $model;
         }
 

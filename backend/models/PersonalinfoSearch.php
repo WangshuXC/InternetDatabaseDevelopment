@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Admins;
+use app\models\Personalinfo;
 
 /**
- * AdminsSearch represents the model behind the search form of `app\models\Admins`.
+ * PersonalinfoSearch represents the model behind the search form of `app\models\Personalinfo`.
  */
-class AdminsSearch extends Admins
+class PersonalinfoSearch extends Personalinfo
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,7 @@ class AdminsSearch extends Admins
     public function rules()
     {
         return [
-            [['AdminID'], 'integer'],
-            [['Username'], 'safe'],
+            [['Name', 'AvatarURL', 'Email', 'GitHubAccount', 'WeChatID'], 'safe'],
         ];
     }
 
@@ -40,7 +39,7 @@ class AdminsSearch extends Admins
      */
     public function search($params)
     {
-        $query = Admins::find();
+        $query = Personalinfo::find();
 
         // add conditions that should always apply here
 
@@ -57,11 +56,11 @@ class AdminsSearch extends Admins
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'AdminID' => $this->AdminID,
-        ]);
-
-        $query->andFilterWhere(['like', 'Username', $this->Username]);
+        $query->andFilterWhere(['like', 'Name', $this->Name])
+            ->andFilterWhere(['like', 'AvatarURL', $this->AvatarURL])
+            ->andFilterWhere(['like', 'Email', $this->Email])
+            ->andFilterWhere(['like', 'GitHubAccount', $this->GitHubAccount])
+            ->andFilterWhere(['like', 'WeChatID', $this->WeChatID]);
 
         return $dataProvider;
     }
