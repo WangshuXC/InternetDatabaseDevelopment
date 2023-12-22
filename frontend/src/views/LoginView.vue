@@ -47,6 +47,9 @@ export default {
                     const status = response.data.status;
                     if (status === 1) {
                         this.$message.success('注册成功');
+                        this.loginData.username = this.registerData.username;
+                        this.loginData.password = this.registerData.password;
+                        this.toggleForm('login')
                     }
                     else if (status === 0) {
                         // 注册失败

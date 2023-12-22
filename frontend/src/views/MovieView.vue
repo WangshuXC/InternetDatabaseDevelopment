@@ -22,6 +22,17 @@ export default {
                 .catch(error => {
                     console.error('请求失败', error);
                 });
+        },
+        handlePageChange(page) {
+            axios.post('http://10.130.26.91:8080/api/getvideo?page=' + page)
+                .then(response => {
+                    const elBacktop = document.querySelector('.el-backtop');
+                    this.movieList = response.data;
+                    elBacktop.click();
+                })
+                .catch(error => {
+                    console.error('请求失败', error);
+                });
         }
     }
 }
@@ -30,11 +41,16 @@ export default {
 <template>
     <div class="movieContainer">
         <div class="movieBox">
-            <div v-for="item in movieList" :key="item.VideoID" class="movieItem">
-                <router-link :to="'/movie/' + item.VideoID">
-                    <InfoBox :src=item.PictureURL :title=item.Title :synopsis="item.Description" />
-                </router-link>
+            <div class="movieItemBox">
+                <div v-for="item in movieList" :key="item.VideoID" class="movieItem">
+                    <router-link :to="'/movie/' + item.VideoID">
+                        <InfoBox :src=item.PictureURL :title=item.Title :time=item.UploadDate
+                            :synopsis="item.Description" />
+                    </router-link>
+                </div>
             </div>
+            <el-pagination background layout="prev, pager, next" :total="60" hide-on-single-page
+                @current-change="handlePageChange" />
         </div>
     </div>
     <el-backtop :right="100" :bottom="100" />
@@ -64,6 +80,14 @@ export default {
     width: 90%;
     height: auto;
     padding: 30px;
+}
+
+.movieItemBox {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
 }
 
 .movieItem {

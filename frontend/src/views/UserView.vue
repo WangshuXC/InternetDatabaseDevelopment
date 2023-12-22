@@ -77,7 +77,7 @@ export default {
     margin-top: -20vh;
 }
 
-button {
+.Info button {
     background-image: linear-gradient(#00e5dd 0%, #00b8fc 80%);
     margin-top: 3vh;
     color: white;

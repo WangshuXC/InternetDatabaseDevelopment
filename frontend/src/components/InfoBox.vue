@@ -6,7 +6,7 @@
             <h1>{{ title }}</h1>
 
             <div class="infos">
-                <span>·&nbsp;&nbsp;2022&nbsp;&nbsp;·&nbsp;&nbsp;3h12</span>
+                <span>·&nbsp;&nbsp;{{ time }}&nbsp;&nbsp;·&nbsp;&nbsp;3h12</span>
             </div>
 
             <p class="synopsis">
@@ -31,6 +31,10 @@ export default {
             type: String,
             required: true
         },
+        time: {
+            type: String,
+            required: true
+        }
     },
     mounted() {
         console.log(this.title)

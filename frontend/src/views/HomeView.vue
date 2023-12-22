@@ -1,5 +1,6 @@
 <script>
-
+import Plyr from 'plyr';
+import 'plyr/dist/plyr.css';
 export default {
     data() {
         return {
@@ -24,7 +25,20 @@ export default {
         };
     },
     mounted() {
+        this.initPlayer()
     },
+    methods: {
+        initPlayer() {
+            this.player = new Plyr('#player1', {
+                controls: ['play-large', 'progress', 'current-time',],
+                speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
+            });
+            this.player = new Plyr('#player2', {
+                controls: ['play-large', 'progress', 'current-time',],
+                speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
+            });
+        },
+    }
 };
 </script>
 
@@ -38,8 +52,20 @@ export default {
                 </el-carousel-item>
             </el-carousel>
         </div>
-        <div class="a">
 
+
+        <div class="videoPlayer">
+            <h1>福岛核废水轨迹模拟</h1>
+            <video id="player1" playsinline controls>
+                <source src="../assets/videos/扩散.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="videoPlayer">
+            <h1>百万吨核污染水入海，有何危害？</h1>
+            <video id="player2" playsinline controls>
+                <source src="../assets/videos/危害.mp4" type="video/mp4">
+            </video>
         </div>
     </div>
 </template>
@@ -52,12 +78,13 @@ export default {
     justify-content: center;
     align-items: center;
     width: 90%;
-    height: 65vh;
+    min-height: 65vh;
     margin-top: 10vh;
 }
 
 .homeContainer h1 {
     color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     margin-bottom: 3vh;
 }
 
@@ -73,9 +100,23 @@ export default {
     display: block;
 }
 
-.a {
-    background-color: black;
-    width: 100%;
-    height: 10vh;
+.videoPlayer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10vh;
+    max-width: 50%;
+
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+}
+
+.videoPlayer h1 {
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 </style>
