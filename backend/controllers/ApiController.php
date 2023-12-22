@@ -6,7 +6,7 @@
  * Coding by LiangXiaochu 2110951
  * 创建了这个主要用于根据api来调用不同的函数的控制器，从而读取特定的表来返回不同的值给前端，为其他组员提供模板
  * 增加了用于注册和登录的api
- * 修改了评论查找的api，能够查找特定视频的评论
+ * 修改了评论查找的api，能够查找特定视频的评论，以及能够查找特定用户的评论
  * 修改了视频查找的api，能够根据VideoID获取视频信息
  * 
  * Coding by FangYi 2112106
@@ -157,12 +157,25 @@ class ApiController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $vid = \Yii::$app->request->get('vid');
-        if ($vid !== null) {
-            // 如果有 vid 参数，则查询指定 VideoID 的视频信息
-            $comments = Comments::find()->select(['CommentID', 'VideoID', 'Comment', 'CommentDate', 'Username'])->where(['VideoID' => $vid])->all();
+        $username = \Yii::$app->request->get('username');
+        
+        if ($username !== null) {
+            // 如果有 username 参数，则查询指定 Username 的评论信息
+            $comments = Comments::find()
+                ->select(['CommentID', 'VideoID', 'Comment', 'CommentDate', 'Username'])
+                ->where(['Username' => $username])
+                ->all();
+        } elseif ($vid !== null) {
+            // 如果有 vid 参数，则查询指定 VideoID 的评论信息
+            $comments = Comments::find()
+                ->select(['CommentID', 'VideoID', 'Comment', 'CommentDate', 'Username'])
+                ->where(['VideoID' => $vid])
+                ->all();
         } else {
             // 否则按照原来的逻辑查询分页数据
-            $comments = Comments::find()->select(['CommentID', 'VideoID', 'Comment', 'CommentDate', 'Username'])->all();
+            $comments = Comments::find()
+                ->select(['CommentID', 'VideoID', 'Comment', 'CommentDate', 'Username'])
+                ->all();
         }
 
         // 格式化为 JSON 并返回
