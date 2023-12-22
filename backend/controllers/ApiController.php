@@ -201,13 +201,13 @@ class ApiController extends Controller
                 ->all();
         } elseif ($vid !== null) {
             // 如果有 vid 参数，则查询指定 ArticleID 的评论信息
-            $comments = Videocomments::find()
+            $comments = Articlecomments::find()
                 ->select(['CommentID', 'ArticleID', 'Comment', 'CommentDate', 'Username'])
                 ->where(['ArticleID' => $vid])
                 ->all();
         } else {
             // 否则按照原来的逻辑查询分页数据
-            $comments = Videocomments::find()
+            $comments = Articlecomments::find()
                 ->select(['CommentID', 'ArticleID', 'Comment', 'CommentDate', 'Username'])
                 ->all();
         }
