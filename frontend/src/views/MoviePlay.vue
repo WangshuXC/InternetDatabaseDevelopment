@@ -73,7 +73,7 @@ export default {
         },
         getComments() {
             const id = this.$route.params.id;
-            axios.post('http://10.130.26.91:8080/api/getcomment?vid=' + id)
+            axios.post('http://10.130.26.91:8080/api/getvideocomment?vid=' + id)
                 .then(response => {
                     this.messages = response.data;
                 })
@@ -85,7 +85,7 @@ export default {
             const username = sessionStorage.getItem('Username');
             const id = this.$route.params.id;
             if (this.message) {
-                const url = `http://10.130.26.91:8080/api/addcomment?username=${username}&comment=${encodeURIComponent(this.message)}&videoID=${id}`;
+                const url = `http://10.130.26.91:8080/api/addvideocomment?username=${username}&comment=${encodeURIComponent(this.message)}&videoID=${id}`;
                 axios.post(url)
                     .then(response => {
                         const status = response.data.status;

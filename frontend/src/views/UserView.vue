@@ -9,19 +9,38 @@
             </div>
         </div>
 
-        <div id="messageBoard" v-show="showMessageBoard">
-            <div v-for="(msg, index) in messages" :key="index" class="message">
-                <div class="message-info">
-                    <div class="info">
-                        <router-link :to="'/movie/' + msg.VideoID">
-                            <strong>{{ msg.VideoID }}</strong>
-                        </router-link>
+        <transition name="fade">
+            <div id="messageBoard" v-show="showMessageBoard" key="messageBoard1">
+                <div v-for="(msg, index) in messages1" :key="index" class="message">
+                    <div class="message-info">
+                        <div class="info">
+                            <router-link :to="'/article/' + msg.VideoID">
+                                <strong>文章id：{{ msg.ArticleID }}</strong>
+                            </router-link>
+                        </div>
+                        <span>发布于: {{ msg.CommentDate }}</span>
                     </div>
-                    <span>发布于: {{ msg.CommentDate }}</span>
+                    <div class="content">{{ msg.Comment }}</div>
                 </div>
-                <div class="content">{{ msg.Comment }}</div>
             </div>
-        </div>
+        </transition>
+
+        <transition name="fade">
+            <div id="messageBoard" v-show="showMessageBoard">
+                <div v-for="(msg, index) in messages2" :key="index" class="message">
+                    <div class="message-info">
+                        <div class="info">
+                            <router-link :to="'/movie/' + msg.VideoID">
+                                <strong>视频id：{{ msg.VideoID }}</strong>
+                            </router-link>
+                        </div>
+                        <span>发布于: {{ msg.CommentDate }}</span>
+                    </div>
+                    <div class="content">{{ msg.Comment }}</div>
+                </div>
+            </div>
+        </transition>
+
         <el-backtop :right="100" :bottom="100" />
     </div>
 </template>
@@ -33,8 +52,10 @@ export default {
         return {
             username: '',
             showMessageBoard: false,
-            messages: [
-            ]
+            messages1: [
+            ],
+            messages2: [
+            ],
         }
     },
     mounted() {
@@ -42,17 +63,28 @@ export default {
         if (username) {
             this.username = username;
         };
-        this.getComments();
+        this.getAComments();
+        this.getVComments();
     },
     methods: {
         clearSession() {
             sessionStorage.clear();
             window.location.href = '/login';
         },
-        getComments() {
-            axios.post('http://10.130.26.91:8080/api/getcomment?username=' + this.username)
+        getAComments() {
+            axios.post('http://10.130.26.91:8080/api/getarticlecomment?username=' + this.username)
                 .then(response => {
-                    this.messages = response.data;
+                    this.messages1 = response.data;
+                })
+                .catch(error => {
+                    console.error('请求失败:', error);
+                    this.$message.error('请求失败');
+                });
+        },
+        getVComments() {
+            axios.post('http://10.130.26.91:8080/api/getvideocomment?username=' + this.username)
+                .then(response => {
+                    this.messages2 = response.data;
                 })
                 .catch(error => {
                     console.error('请求失败:', error);
@@ -67,6 +99,16 @@ export default {
 </script>
 
 <style>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 1s;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+
 .userContainer {
     display: flex;
     justify-content: center;
@@ -127,13 +169,15 @@ export default {
     margin-bottom: -10vh;
 }
 
+
 #messageBoard {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 15px;
-    width: 50%;
+    width: 40%;
+    height: auto;
     text-align: left;
     margin-top: 5vh;
 }
