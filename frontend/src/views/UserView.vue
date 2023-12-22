@@ -22,6 +22,7 @@
                 <div class="content">{{ msg.Comment }}</div>
             </div>
         </div>
+        <el-backtop :right="100" :bottom="100" />
     </div>
 </template>
 
@@ -127,19 +128,24 @@ export default {
 }
 
 #messageBoard {
-    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    width: 50%;
     text-align: left;
+    margin-top: 5vh;
 }
 
 .message {
     width: 100%;
-    margin: 10px;
     padding: 10px;
     opacity: 1;
     animation: messageFadeIn 0.5s ease forwards;
     /* background-image: linear-gradient(90deg, #8ec5fc 0%, #e0c3fc 100%); */
     background-color: #fff;
-    margin: 70px 0;
+    margin: 30px 0;
     border-radius: 10px;
     box-shadow: 0 10px 20px #00000026;
     text-shadow: 0px 0px 20px #ffffff;

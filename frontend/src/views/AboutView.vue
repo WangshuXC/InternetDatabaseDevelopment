@@ -24,6 +24,7 @@ export default {
             <MenberBox3></MenberBox3>
             <MenberBox4></MenberBox4>
         </div>
+        <el-backtop :right="100" :bottom="100" />
     </div>
 </template>
 
