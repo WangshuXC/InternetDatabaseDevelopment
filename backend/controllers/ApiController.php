@@ -294,10 +294,14 @@ class ApiController extends Controller
     public function actionGetpersonalinfo()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
+        $name = \Yii::$app->request->get('name');
+        if ($name !== null) {
         // 查询数据库获取个人信息信息
-        $personalinfo = Personalinfo::find()->select(['Name', 'Info', 'AvatarURL', 'Email', 'GitHubAccount', 'WeChatID'])->all();
-
+        $personalinfo = Personalinfo::find()->select(['Name', 'Info', 'AvatarURL', 'Email', 'GitHubAccount', 'WeChatID'])->where(['Name' => $name])->one();
+        }
+        else{
+            $personalinfo = Personalinfo::find()->select(['Name', 'Info', 'AvatarURL', 'Email', 'GitHubAccount', 'WeChatID'])->all();
+        }
         // 格式化为 JSON 并返回
         return $personalinfo;
     }

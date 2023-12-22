@@ -5,7 +5,7 @@
                 <img :src="image" alt="user">
             </div>
             <div class="content">
-                <h2>{{ name }}<br><br><span>{{ title }}</span></h2>
+                <h2>{{ name }}<br><br><span>{{ info }}</span></h2>
             </div>
             <span class="toggle" @click="toggle"></span>
         </div>
@@ -21,29 +21,58 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     props: {
-        name: {
+        fullname: {
             type: String,
-            required: true
-        },
-        title: {
-            type: String,
-            required: true
-        },
-        image: {
-            type: String,
-            required: true
-        },
-        contactList: {
-            type: Array,
             required: true
         }
     },
     data() {
         return {
-            isActive: false
+            isActive: false,
+            name: '',
+            info: '',
+            image: '',
+            contactList: [
+                {
+                    color: '#c71610',
+                    icon: 'fa-solid fa-envelope',
+                    content: '',
+                    link: ''
+                },
+                {
+                    color: '#171515',
+                    icon: 'fa-brands fa-github',
+                    content: '',
+                    link: ''
+                },
+                {
+                    color: '#1ed76d',
+                    icon: 'fa-brands fa-weixin',
+                    content: '',
+                }
+            ]
         };
+    },
+    mounted() {
+        axios.get(`http://10.130.26.91:8080/api/getpersonalinfo?name=${this.fullname}`)
+            .then(response => {
+                const responseData = response.data;
+                this.name = responseData.Name;
+                this.info = responseData.Info;
+                this.image = responseData.AvatarURL;
+
+                this.contactList[0].content = responseData.Email;
+                this.contactList[0].link = "mailto:" + responseData.Email;
+                this.contactList[1].content = responseData.GitHubAccount;
+                this.contactList[1].link = "https://github.com/" + responseData.GitHubAccount;
+                this.contactList[2].content = responseData.WeChatID;
+            }).catch(error => {
+                console.error(error);
+            });
     },
     methods: {
         toggle() {
@@ -52,6 +81,7 @@ export default {
     }
 };
 </script>
+
     
 <style scoped>
 * {
