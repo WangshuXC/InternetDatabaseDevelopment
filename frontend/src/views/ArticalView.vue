@@ -1,29 +1,24 @@
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
             articalList: [
                 { id: 1, title: 'artical1', content: 'aaaaaaaa1', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 2, title: 'artical2', content: 'aaaaaaaa2', picurl: 'https://p4.img.cctvpic.com/photoworkspace/2023/11/02/2023110216242032841.jpg' },
-                { id: 3, title: 'artical3', content: 'aaaaaaaa3', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 4, title: 'artical4', content: 'aaaaaaaa4', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 5, title: 'artical5', content: 'aaaaaaaa5', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 6, title: 'artical6', content: 'aaaaaaaa6', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 7, title: 'artical7', content: 'aaaaaaaa7', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 8, title: 'artical8', content: 'aaaaaaaa8', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 9, title: 'artical9', content: 'aaaaaaaa9', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 10, title: 'artical10', content: 'aaaaaaaa10', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 11, title: 'artical11', content: 'aaaaaaaa11', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 12, title: 'artical12', content: 'aaaaaaaa12', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 13, title: 'artical13', content: 'aaaaaaaa13', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 14, title: 'artical14', content: 'aaaaaaaa14', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 15, title: 'artical15', content: 'aaaaaaaa15', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 16, title: 'artical16', content: 'aaaaaaaa16', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 17, title: 'artical17', content: 'aaaaaaaa17', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 18, title: 'artical18', content: 'aaaaaaaa18', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 19, title: 'artical19', content: 'aaaaaaaa19', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' },
-                { id: 20, title: 'artical20', content: 'aaaaaaaa20', picurl: 'https://p2.img.cctvpic.com/photoworkspace/2023/07/27/2023072712591675099.jpg' }
             ]
+        }
+    },
+    methods: {
+        handlePageChange(page) {
+            axios.post('http://10.130.26.91:8080/api/getvideo?page=' + page)
+                .then(response => {
+                    const elBacktop = document.querySelector('.el-backtop');
+                    this.movieList = response.data;
+                    elBacktop.click();
+                })
+                .catch(error => {
+                    console.error('请求失败', error);
+                });
         }
     }
 }
@@ -42,8 +37,9 @@ export default {
                         <p>{{ item.content }}</p>
                     </div>
                 </div>
-
             </div>
+            <el-pagination background layout="prev, pager, next" :total="60" hide-on-single-page
+                @current-change="handlePageChange" />
         </div>
     </div>
     <el-backtop :right="100" :bottom="100" />
@@ -56,7 +52,7 @@ export default {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-top: 6vh;
+    margin-top: 10vh;
     width: 100vw;
     height: auto;
 }
