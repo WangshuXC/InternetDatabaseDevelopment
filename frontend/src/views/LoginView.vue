@@ -55,7 +55,7 @@ export default {
                 })
                 .catch(error => {
                     console.error('登录失败:', error);
-                    this.$message.error('登录失败2');
+                    this.$message.error('登录失败');
                 });
         },
         login() {
@@ -79,12 +79,12 @@ export default {
                         }, 2000);
                     } else {
                         // 登录失败
-                        this.$message.error('登录失败1');
+                        this.$message.error('用户名或密码错误');
                     }
                 })
                 .catch(error => {
                     console.error('登录失败:', error);
-                    this.$message.error('登录失败2');
+                    this.$message.error('登录失败');
                 });
         }
     }
