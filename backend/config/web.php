@@ -64,7 +64,9 @@ $config = [
                 'api/addarticlecomment' => 'api/addarticlecomment',
                 'api/addclick' => 'api/addclick',
                 'api/getpersonalinfo' => 'api/getpersonalinfo',
-                'api/addwebviews' => 'api/addwebviews'
+                'api/addwebviews' => 'api/addwebviews',
+                'api/getvideopagecount' => 'api/getvideopagecount',
+                'api/getarticlepagecount' => 'api/getarticlepagecount'
             ],
         ],
         'response' => [
