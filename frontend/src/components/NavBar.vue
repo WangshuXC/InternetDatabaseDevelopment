@@ -5,7 +5,7 @@
 
         <div class="flex-grow" />
         <el-menu-item index="/movie">视频</el-menu-item>
-        <el-menu-item index="/artical">文章</el-menu-item>
+        <el-menu-item index="/article">文章</el-menu-item>
         <el-menu-item index="/about">关于</el-menu-item>
         <el-menu-item index="/user">个人</el-menu-item>
     </el-menu>
