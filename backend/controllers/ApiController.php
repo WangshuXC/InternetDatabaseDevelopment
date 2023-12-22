@@ -322,6 +322,7 @@ class ApiController extends Controller
         if($count % 18 !== 0){
             $pagecount = $pagecount + 1;
         }
+        $pagecount=json_encode($pagecount);
         return $pagecount;
     }
     public function actionGetarticlepagecount()
@@ -329,11 +330,12 @@ class ApiController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         $count = Articles::find()->count();
-        $pagecount = intval($count / 18);
+        $pagecount = intval($count / 15);
 
-        if($count % 18 !== 0){
+        if($count % 15 !== 0){
             $pagecount = $pagecount + 1;
         }
+        $pagecount=json_encode($pagecount);
         return $pagecount;
     }
 }
