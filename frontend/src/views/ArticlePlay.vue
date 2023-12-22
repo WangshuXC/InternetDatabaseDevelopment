@@ -1,8 +1,11 @@
 <template>
     <div class="ArticleContainer">
-        <h1 class="ArticleTitle">{{ title }}</h1>
-        <div class="ArticleContent" v-html="content" />
-
+        <div class="ArticleContent">
+            <h1 class="ArticleTitle">{{ title }}</h1>
+            <div v-html="content" />
+        </div>
+        <!-- <div class="ArticleContent" v-html="content" /> -->
+        <!-- <h1 class="ArticleTitle">{{ title }}</h1> -->
         <div class="CommentContainer">
             <div class="CommentForm">
                 <textarea v-model="message" placeholder="留言内容"></textarea>
@@ -46,7 +49,8 @@ export default {
             const id = this.$route.params.id;
             axios.post('http://10.130.26.91:8080/api/getarticle?id=' + id)
                 .then(response => {
-                    this.articleSrc = response.data.articleURL;
+                    this.title = response.data.Title;
+                    this.content = response.data.Content;
                 })
                 .catch(error => {
                     console.error('请求数据失败', error);
@@ -101,6 +105,9 @@ export default {
 
 .ArticleContent {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     margin-top: 5vh;
     margin-bottom: 5vh;
     font-size: 3vh;
@@ -108,7 +115,6 @@ export default {
     background-color: rgba(255, 254, 254, 0.7);
     border-radius: 15px;
     padding: 20px;
-    justify-content: center;
     width: 100%;
 }
 
