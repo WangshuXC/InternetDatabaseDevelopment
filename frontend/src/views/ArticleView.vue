@@ -3,12 +3,13 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            articleList: [
-            ]
+            articleList: [],
+            pagecount: 1,
         }
     },
     mounted() {
         this.getUrl();
+        this.getpage();
     },
     methods: {
         getUrl() {
@@ -30,6 +31,17 @@ export default {
                 .catch(error => {
                     console.error('请求失败', error);
                 });
+        },
+        getpage() {
+            axios.post('http://10.130.26.91:8080/api/getarticlepagecount')
+                .then(response => {
+                    this.pagecount = response.data * 10;
+
+                    console.log(this.pagecount)
+                })
+                .catch(error => {
+                    console.error('请求失败', error);
+                });
         }
     }
 }
@@ -44,7 +56,7 @@ export default {
                     <!-- <div class="contentBox" v-html="item.Content" /> -->
                 </router-link>
             </div>
-            <el-pagination background layout="prev, pager, next" :total="40" hide-on-single-page
+            <el-pagination background layout="prev, pager, next" :total="pagecount" hide-on-single-page
                 @current-change="handlePageChange" />
         </div>
     </div>

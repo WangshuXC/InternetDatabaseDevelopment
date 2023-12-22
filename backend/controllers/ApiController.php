@@ -132,10 +132,14 @@ class ApiController extends Controller
         // 获取页数
         $page = \Yii::$app->request->get('page');
         $intpage = (int)$page;
-
-        // 查询数据库获取对应页数的文章信息
-        $articles = Articles::find()->select(['ArticleID', 'Title', 'Content', 'PublicationDate'])->offset(15*($intpage-1))->limit(15)->all();
-
+        $id = \Yii::$app->request->get('id');
+        if ($id !== null) {
+            $articles = Articles::find()->select(['ArticleID', 'Title', 'Content', 'PublicationDate'])->where(['ArticleID' => $id])->one();
+        }
+        else{
+            // 查询数据库获取对应页数的文章信息
+            $articles = Articles::find()->select(['ArticleID', 'Title', 'Content', 'PublicationDate'])->offset(15*($intpage-1))->limit(15)->all();
+        }
         // 格式化为 JSON 并返回
         return $articles;
     }
@@ -322,6 +326,7 @@ class ApiController extends Controller
         if($count % 18 !== 0){
             $pagecount = $pagecount + 1;
         }
+
         $pagecount=json_encode($pagecount);
         return $pagecount;
     }
@@ -335,6 +340,7 @@ class ApiController extends Controller
         if($count % 15 !== 0){
             $pagecount = $pagecount + 1;
         }
+
         $pagecount=json_encode($pagecount);
         return $pagecount;
     }

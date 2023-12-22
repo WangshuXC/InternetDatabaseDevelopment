@@ -1,11 +1,9 @@
 <template>
     <div class="ArticleContainer">
         <div class="ArticleContent">
-            <h1 class="ArticleTitle">{{ title }}</h1>
+            <h2 class="ArticleTitle">{{ title }}</h2>
             <div v-html="content" />
         </div>
-        <!-- <div class="ArticleContent" v-html="content" /> -->
-        <!-- <h1 class="ArticleTitle">{{ title }}</h1> -->
         <div class="CommentContainer">
             <div class="CommentForm">
                 <textarea v-model="message" placeholder="留言内容"></textarea>
@@ -51,6 +49,7 @@ export default {
                 .then(response => {
                     this.title = response.data.Title;
                     this.content = response.data.Content;
+                    console.log(this.title)
                 })
                 .catch(error => {
                     console.error('请求数据失败', error);
@@ -107,6 +106,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 
     margin-top: 5vh;
     margin-bottom: 5vh;
@@ -116,6 +116,25 @@ export default {
     border-radius: 15px;
     padding: 20px;
     width: 100%;
+}
+
+.left_zw {
+    margin-top: 2vh;
+    margin-inline: 1vw;
+}
+
+.left_zw p {
+    margin-bottom: 1vh;
+}
+
+.pictext {
+    color: rgb(187, 187, 187);
+    margin-bottom: 10px;
+}
+
+.left_name {
+    margin-top: 3vh;
+    float: right;
 }
 
 .CommentContainer {

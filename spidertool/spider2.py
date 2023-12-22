@@ -27,10 +27,20 @@ for i, url in enumerate(urls):
     time = re.sub(r"[^0-9\s:-]", "", time)
     time = time.strip()
     print(time)
+    content = elements.find(class_="left_zw")
+    pictext_tags = content.find_all(class_="pictext")
+    for tag in pictext_tags:
+        tag.decompose()
+
+    # 查找class为adInContent的标签并删除
+    ad_tags = content.find_all(class_="adInContent")
+    for tag in ad_tags:
+        tag.decompose()
+
     content = re.sub(
         r"<!--(.*?)-->",
         "",
-        re.sub("</?a[^>]*>", "", str(elements.find(class_="left_zw"))),
+        re.sub("</?a[^>]*>", "", str(content)),
     )
     content = re.sub(r'<div id="function_code_page"></div>', "", content)
     print(content)

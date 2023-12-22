@@ -4,11 +4,13 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            movieList: []
+            movieList: [],
+            pagecount: 1,
         }
     },
     mounted() {
         this.getUrl();
+        this.getpage();
     },
     components: {
         InfoBox,
@@ -33,6 +35,17 @@ export default {
                 .catch(error => {
                     console.error('请求失败', error);
                 });
+        },
+        getpage() {
+            axios.post('http://10.130.26.91:8080/api/getvideopagecount')
+                .then(response => {
+                    this.pagecount = response.data * 10;
+
+                    console.log(this.pagecount)
+                })
+                .catch(error => {
+                    console.error('请求失败', error);
+                });
         }
     }
 }
@@ -49,7 +62,7 @@ export default {
                     </router-link>
                 </div>
             </div>
-            <el-pagination background layout="prev, pager, next" :total="60" hide-on-single-page
+            <el-pagination background layout="prev, pager, next" :total="pagecount" hide-on-single-page
                 @current-change="handlePageChange" />
         </div>
     </div>
