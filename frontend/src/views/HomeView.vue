@@ -30,6 +30,7 @@ export default {
 
 <template>
     <div class="homeContainer">
+        <h1>日本危害海洋环境的始末</h1>
         <div class="timeLine">
             <el-carousel :interval="3000" type="card" height="50vh" trigger="click">
                 <el-carousel-item v-for="(imagePath, index) in imagePaths" :key="index">
@@ -37,21 +38,44 @@ export default {
                 </el-carousel-item>
             </el-carousel>
         </div>
+        <div class="a">
+
+        </div>
     </div>
 </template>
 
 
 <style>
 .homeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 90%;
     height: 65vh;
     margin-top: 10vh;
 }
 
+.homeContainer h1 {
+    color: white;
+    margin-bottom: 3vh;
+}
+
+.timeLine {
+    display: block;
+    width: 100%;
+    height: 50vh;
+}
 
 .timeLine img {
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+.a {
+    background-color: black;
+    width: 100%;
+    height: 10vh;
 }
 </style>

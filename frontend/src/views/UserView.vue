@@ -4,6 +4,7 @@
             <img src="../assets/imgs/touxiang.jpg" />
             <div class="Info">
                 <strong>{{ username }}</strong>
+                <button @click="clearSession">取消登录</button>
             </div>
         </div>
     </div>
@@ -20,6 +21,12 @@ export default {
         const username = sessionStorage.getItem('Username');
         if (username) {
             this.username = username;
+        }
+    },
+    methods: {
+        clearSession() {
+            sessionStorage.clear();
+            window.location.href = '/login';
         }
     }
 }
@@ -68,5 +75,17 @@ export default {
     position: relative;
     z-index: 1;
     margin-top: -20vh;
+}
+
+button {
+    background-image: linear-gradient(#00e5dd 0%, #00b8fc 80%);
+    margin-top: 3vh;
+    color: white;
+    border: none;
+    font-size: 2vh;
+    letter-spacing: 5px;
+    width: 10vw;
+    height: 4vh;
+    border-radius: 50PX;
 }
 </style>

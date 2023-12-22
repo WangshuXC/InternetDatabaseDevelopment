@@ -20,7 +20,7 @@ export default {
         const Username = sessionStorage.getItem('Username');
         const Password = sessionStorage.getItem('Password');
         if (Username && Password) {
-            window.location.href = '/home';
+            window.location.href = '/';
         }
     },
     methods: {
