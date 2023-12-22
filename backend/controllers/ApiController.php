@@ -225,7 +225,7 @@ class ApiController extends Controller
         return $clicks;
     }
 
-    public function actionAddcomment()
+    public function actionAddvideocomment()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
@@ -233,10 +233,30 @@ class ApiController extends Controller
         $comment = \Yii::$app->request->get('comment');
         $videoID = \Yii::$app->request->get('videoID');
 
-        $comments = new Comments();
+        $comments = new Videocomments();
         $comments->Username = $username;
         $comments->Comment = $comment;
         $comments->VideoID = $videoID;
+
+        if ($comments->save()) {
+            return ['status' => 1, 'message' => '发布评论成功'];
+        } else {
+            return ['status' => -1, 'message' => '发布评论失败'];
+        }
+    }
+
+    public function actionAddarticlecomment()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $username = \Yii::$app->request->get('username');
+        $comment = \Yii::$app->request->get('comment');
+        $articleID = \Yii::$app->request->get('articleID');
+
+        $comments = new Articlecomments();
+        $comments->Username = $username;
+        $comments->Comment = $comment;
+        $comments->ArticleID = $articleID;
 
         if ($comments->save()) {
             return ['status' => 1, 'message' => '发布评论成功'];
