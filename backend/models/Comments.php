@@ -1,11 +1,5 @@
 <?php
 
-
-/**
- * Team: LFZW,NKU
- * Coding by 
- * 
- */
 namespace app\models;
 
 use Yii;
@@ -14,12 +8,12 @@ use Yii;
  * This is the model class for table "comments".
  *
  * @property int $CommentID
- * @property int $UserID
  * @property int $VideoID
  * @property string $Comment
  * @property string|null $CommentDate
+ * @property string $Username
  *
- * @property Users $user
+ * @property Users $username
  * @property Videos $video
  */
 class Comments extends \yii\db\ActiveRecord
@@ -38,12 +32,13 @@ class Comments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['UserID', 'VideoID', 'Comment'], 'required'],
-            [['UserID', 'VideoID'], 'integer'],
+            [['VideoID', 'Comment', 'Username'], 'required'],
+            [['VideoID'], 'integer'],
             [['Comment'], 'string'],
             [['CommentDate'], 'safe'],
-            [['UserID'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['UserID' => 'UserID']],
+            [['Username'], 'string', 'max' => 50],
             [['VideoID'], 'exist', 'skipOnError' => true, 'targetClass' => Videos::class, 'targetAttribute' => ['VideoID' => 'VideoID']],
+            [['Username'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['Username' => 'Username']],
         ];
     }
 
@@ -54,21 +49,21 @@ class Comments extends \yii\db\ActiveRecord
     {
         return [
             'CommentID' => 'Comment ID',
-            'UserID' => 'User ID',
             'VideoID' => 'Video ID',
             'Comment' => 'Comment',
             'CommentDate' => 'Comment Date',
+            'Username' => 'Username',
         ];
     }
 
     /**
-     * Gets query for [[User]].
+     * Gets query for [[Username]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getUsername()
     {
-        return $this->hasOne(Users::class, ['UserID' => 'UserID']);
+        return $this->hasOne(Users::class, ['Username' => 'Username']);
     }
 
     /**

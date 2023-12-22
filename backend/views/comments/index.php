@@ -30,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'CommentID',
-            'UserID',
             'VideoID',
             'Comment:ntext',
             'CommentDate',
+            'Username',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Comments $model, $key, $index, $column) {

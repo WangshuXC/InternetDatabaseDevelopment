@@ -12,13 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'UserID')->textInput() ?>
-
     <?= $form->field($model, 'VideoID')->textInput() ?>
 
     <?= $form->field($model, 'Comment')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'CommentDate')->textInput() ?>
+
+    <?= $form->field($model, 'Username')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

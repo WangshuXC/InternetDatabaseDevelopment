@@ -17,13 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'CommentID') ?>
 
-    <?= $form->field($model, 'UserID') ?>
-
     <?= $form->field($model, 'VideoID') ?>
 
     <?= $form->field($model, 'Comment') ?>
 
     <?= $form->field($model, 'CommentDate') ?>
+
+    <?= $form->field($model, 'Username') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
