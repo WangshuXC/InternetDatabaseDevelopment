@@ -296,7 +296,7 @@ class ApiController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         // 查询数据库获取个人信息信息
-        $personalinfo = Personalinfo::find()->select(['Name', 'AvatarURL', 'Email', 'GitHubAccount', 'WeChatID'])->all();
+        $personalinfo = Personalinfo::find()->select(['Name', 'Info', 'AvatarURL', 'Email', 'GitHubAccount', 'WeChatID'])->all();
 
         // 格式化为 JSON 并返回
         return $personalinfo;

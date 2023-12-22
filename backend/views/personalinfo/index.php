@@ -30,10 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'Name',
+            'Info',
             'AvatarURL',
             'Email:email',
             'GitHubAccount',
-            'WeChatID',
+            //'WeChatID',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Personalinfo $model, $key, $index, $column) {

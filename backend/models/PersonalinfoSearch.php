@@ -17,7 +17,7 @@ class PersonalinfoSearch extends Personalinfo
     public function rules()
     {
         return [
-            [['Name', 'AvatarURL', 'Email', 'GitHubAccount', 'WeChatID'], 'safe'],
+            [['Name', 'Info', 'AvatarURL', 'Email', 'GitHubAccount', 'WeChatID'], 'safe'],
         ];
     }
 
@@ -57,6 +57,7 @@ class PersonalinfoSearch extends Personalinfo
 
         // grid filtering conditions
         $query->andFilterWhere(['like', 'Name', $this->Name])
+            ->andFilterWhere(['like', 'Info', $this->Info])
             ->andFilterWhere(['like', 'AvatarURL', $this->AvatarURL])
             ->andFilterWhere(['like', 'Email', $this->Email])
             ->andFilterWhere(['like', 'GitHubAccount', $this->GitHubAccount])
