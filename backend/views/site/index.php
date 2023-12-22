@@ -22,8 +22,10 @@ $this->title = 'Yii2后端';
         <a href="<?= \Yii::$app->urlManager->createUrl(['users/index']) ?>" class="btn btn-primary">users</a>
         <a href="<?= \Yii::$app->urlManager->createUrl(['articles/index']) ?>" class="btn btn-primary">articles</a>
         <a href="<?= \Yii::$app->urlManager->createUrl(['videos/index']) ?>" class="btn btn-primary">videos</a>
-        <a href="<?= \Yii::$app->urlManager->createUrl(['comments/index']) ?>" class="btn btn-primary">comments</a>
+        <a href="<?= \Yii::$app->urlManager->createUrl(['videocomments/index']) ?>" class="btn btn-primary">video_comments</a>
+        <a href="<?= \Yii::$app->urlManager->createUrl(['articlecomments/index']) ?>" class="btn btn-primary">article_comments</a>
         <a href="<?= \Yii::$app->urlManager->createUrl(['clicks/index']) ?>" class="btn btn-primary">clicks</a>
+        <a href="<?= \Yii::$app->urlManager->createUrl(['personalinfo/index']) ?>" class="btn btn-primary">personalinfo</a>
     </div>
 
 </div>

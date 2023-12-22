@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Admins;
+use app\models\Webviews;
 
 /**
- * AdminsSearch represents the model behind the search form of `app\models\Admins`.
+ * WebviewsSearch represents the model behind the search form of `app\models\Webviews`.
  */
-class AdminsSearch extends Admins
+class WebviewsSearch extends Webviews
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,7 @@ class AdminsSearch extends Admins
     public function rules()
     {
         return [
-            [['AdminID'], 'integer'],
-            [['Username'], 'safe'],
+            [['Views'], 'integer'],
         ];
     }
 
@@ -40,7 +39,7 @@ class AdminsSearch extends Admins
      */
     public function search($params)
     {
-        $query = Admins::find();
+        $query = Webviews::find();
 
         // add conditions that should always apply here
 
@@ -58,10 +57,8 @@ class AdminsSearch extends Admins
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'AdminID' => $this->AdminID,
+            'Views' => $this->Views,
         ]);
-
-        $query->andFilterWhere(['like', 'Username', $this->Username]);
 
         return $dataProvider;
     }

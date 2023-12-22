@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\CommentsSearch $model */
+/** @var app\models\ArticlecommentsSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="comments-search">
+<div class="articlecomments-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'CommentID') ?>
 
-    <?= $form->field($model, 'VideoID') ?>
+    <?= $form->field($model, 'ArticleID') ?>
 
     <?= $form->field($model, 'Comment') ?>
 

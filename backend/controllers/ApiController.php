@@ -17,6 +17,7 @@
  * 更新了管理员登录的api
  * 增加了发布评论的api
  * 增加了点击量增加的api
+ * 增加了获取个人信息的api和增加浏览量的api
  */
 
 namespace app\controllers;
@@ -25,9 +26,12 @@ use yii\web\Controller;
 use app\models\Users;
 use app\models\Articles;
 use app\models\Videos;
-use app\models\Comments;
+use app\models\Videocomments;
+use app\models\Articlecomments;
 use app\models\Admins;
 use app\models\Clicks;
+use app\models\Personalinfo;
+use app\models\Webviews;
 
 
 class ApiController extends Controller
@@ -105,7 +109,7 @@ class ApiController extends Controller
                 // 用户名和密码匹配
                 // 检查用户是否为管理员
                 $admin = Admins::find()
-                    ->where(['UserID' => $user->UserID])
+                    ->where(['Username' => $user->username])
                     ->one();
                 if($admin !== null){
                     return ['status' => 1];
@@ -154,7 +158,7 @@ class ApiController extends Controller
         // 格式化为 JSON 并返回
         return $videos;
     }
-    public function actionGetcomment()
+    public function actionGetvideocomment()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $vid = \Yii::$app->request->get('vid');
@@ -162,20 +166,48 @@ class ApiController extends Controller
         
         if ($username !== null) {
             // 如果有 username 参数，则查询指定 Username 的评论信息
-            $comments = Comments::find()
+            $comments = Videocomments::find()
                 ->select(['CommentID', 'VideoID', 'Comment', 'CommentDate', 'Username'])
                 ->where(['Username' => $username])
                 ->all();
         } elseif ($vid !== null) {
             // 如果有 vid 参数，则查询指定 VideoID 的评论信息
-            $comments = Comments::find()
+            $comments = Videocomments::find()
                 ->select(['CommentID', 'VideoID', 'Comment', 'CommentDate', 'Username'])
                 ->where(['VideoID' => $vid])
                 ->all();
         } else {
             // 否则按照原来的逻辑查询分页数据
-            $comments = Comments::find()
+            $comments = Videocomments::find()
                 ->select(['CommentID', 'VideoID', 'Comment', 'CommentDate', 'Username'])
+                ->all();
+        }
+
+        // 格式化为 JSON 并返回
+        return $comments;
+    }
+    public function actionGetarticlecomment()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $vid = \Yii::$app->request->get('vid');
+        $username = \Yii::$app->request->get('username');
+        
+        if ($username !== null) {
+            // 如果有 username 参数，则查询指定 Username 的评论信息
+            $comments = Articlecomments::find()
+                ->select(['CommentID', 'ArticleID', 'Comment', 'CommentDate', 'Username'])
+                ->where(['Username' => $username])
+                ->all();
+        } elseif ($vid !== null) {
+            // 如果有 vid 参数，则查询指定 ArticleID 的评论信息
+            $comments = Videocomments::find()
+                ->select(['CommentID', 'ArticleID', 'Comment', 'CommentDate', 'Username'])
+                ->where(['ArticleID' => $vid])
+                ->all();
+        } else {
+            // 否则按照原来的逻辑查询分页数据
+            $comments = Videocomments::find()
+                ->select(['CommentID', 'ArticleID', 'Comment', 'CommentDate', 'Username'])
                 ->all();
         }
 
@@ -226,5 +258,36 @@ class ApiController extends Controller
                 ->one();
 
         $click->ClickCount = $click->ClickCount + 1;
+
+        if ($click->save()) {
+            return ['status' => 1, 'message' => '点击量增加成功'];
+        } else {
+            return ['status' => -1, 'message' => '点击量增加失败'];
+        }
+    }
+
+    public function actionGetpersonalinfo()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        // 查询数据库获取个人信息信息
+        $clicks = Clicks::find()->select(['Name', 'AvatarURL', 'Email', 'GitHubAccount', 'WeChatID'])->all();
+
+        // 格式化为 JSON 并返回
+        return $clicks;
+    }
+
+    public function actionAddwebviews()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $webviews = Webviews::find()->one();
+        $webviews->Views = $webviews->Views + 1;
+
+        if ($webviews->save()) {
+            return ['status' => 1, 'message' => '浏览量增加成功'];
+        } else {
+            return ['status' => -1, 'message' => '浏览量增加失败'];
+        }
     }
 }

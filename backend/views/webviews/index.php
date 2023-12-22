@@ -1,24 +1,24 @@
 <?php
 
-use app\models\Comments;
+use app\models\Webviews;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var app\models\CommentsSearch $searchModel */
+/** @var app\models\WebviewsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Comments';
+$this->title = 'Webviews';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="comments-index">
+<div class="webviews-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Comments', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Webviews', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,15 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'CommentID',
-            'VideoID',
-            'Comment:ntext',
-            'CommentDate',
-            'Username',
+            'Views',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Comments $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'CommentID' => $model->CommentID]);
+                'urlCreator' => function ($action, Webviews $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'Views' => $model->Views]);
                  }
             ],
         ],

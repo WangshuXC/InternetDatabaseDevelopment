@@ -57,10 +57,13 @@ $config = [
                 'api/adminlogin' => 'api/adminlogin',
                 'api/getarticle' => 'api/getarticle',
                 'api/getvideo' => 'api/getvideo',
-                'api/getcomment' => 'api/getcomment',
+                'api/getvideocomment' => 'api/getvideocomment',
+                'api/getarticlecomment' => 'api/getarticlecomment',
                 'api/getclick' => 'api/getclick',
                 'api/addcomment' => 'api/addcomment',
-                'api/addclick' => 'api/addclick'
+                'api/addclick' => 'api/addclick',
+                'api/getpersonalinfo' => 'api/getpersonalinfo',
+                'api/addwebviews' => 'api/addwebviews'
             ],
         ],
         'response' => [

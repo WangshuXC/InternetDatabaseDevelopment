@@ -4,20 +4,20 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\Admins $model */
+/** @var app\models\Webviews $model */
 
-$this->title = $model->AdminID;
-$this->params['breadcrumbs'][] = ['label' => 'Admins', 'url' => ['index']];
+$this->title = $model->Views;
+$this->params['breadcrumbs'][] = ['label' => 'Webviews', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="admins-view">
+<div class="webviews-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'AdminID' => $model->AdminID], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'AdminID' => $model->AdminID], [
+        <?= Html::a('Update', ['update', 'Views' => $model->Views], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'Views' => $model->Views], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -29,8 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'AdminID',
-            'Username',
+            'Views',
         ],
     ]) ?>
 

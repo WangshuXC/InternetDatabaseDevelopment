@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Admins;
+use app\models\Articlecomments;
 
 /**
- * AdminsSearch represents the model behind the search form of `app\models\Admins`.
+ * ArticlecommentsSearch represents the model behind the search form of `app\models\Articlecomments`.
  */
-class AdminsSearch extends Admins
+class ArticlecommentsSearch extends Articlecomments
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class AdminsSearch extends Admins
     public function rules()
     {
         return [
-            [['AdminID'], 'integer'],
-            [['Username'], 'safe'],
+            [['CommentID', 'ArticleID'], 'integer'],
+            [['Comment', 'CommentDate', 'Username'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class AdminsSearch extends Admins
      */
     public function search($params)
     {
-        $query = Admins::find();
+        $query = Articlecomments::find();
 
         // add conditions that should always apply here
 
@@ -58,10 +58,13 @@ class AdminsSearch extends Admins
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'AdminID' => $this->AdminID,
+            'CommentID' => $this->CommentID,
+            'ArticleID' => $this->ArticleID,
+            'CommentDate' => $this->CommentDate,
         ]);
 
-        $query->andFilterWhere(['like', 'Username', $this->Username]);
+        $query->andFilterWhere(['like', 'Comment', $this->Comment])
+            ->andFilterWhere(['like', 'Username', $this->Username]);
 
         return $dataProvider;
     }

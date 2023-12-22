@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Comments;
+use app\models\Videocomments;
 
 /**
- * CommentsSearch represents the model behind the search form of `app\models\Comments`.
+ * VideocommentsSearch represents the model behind the search form of `app\models\Videocomments`.
  */
-class CommentsSearch extends Comments
+class VideocommentsSearch extends Videocomments
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class CommentsSearch extends Comments
      */
     public function search($params)
     {
-        $query = Comments::find();
+        $query = Videocomments::find();
 
         // add conditions that should always apply here
 
