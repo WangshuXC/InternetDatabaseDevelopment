@@ -19,10 +19,8 @@
         </ul>
     </div>
 </template>
-
+    
 <script>
-import axios from 'axios';
-
 export default {
     data() {
         return {
@@ -34,41 +32,30 @@ export default {
                 {
                     color: '#c71610',
                     icon: 'fa-solid fa-envelope',
-                    content: '',
+                    content: '2110951@mail.nankai.edu.cn',
                     link: 'mailto:2110951@mail.nankai.edu.cn'
                 },
                 {
                     color: '#171515',
                     icon: 'fa-brands fa-github',
-                    content: '',
+                    content: 'WangshuXC',
                     link: 'https://github.com/WangshuXC'
                 },
                 {
                     color: '#1ed76d',
                     icon: 'fa-brands fa-weixin',
-                    content: '',
+                    content: 'WangshuXC',
                 }
             ]
-        };
-    },
-    mounted() {
-        axios.get('/api/data').then(response => {
-            const responseData = response.data;
-            this.contactList[0].content = responseData.contactList[0].content; // Update the specific property
-            this.contactList[1].content = responseData.contactList[1].content; // Update the specific property
-            this.contactList[2].content = responseData.contactList[2].content; // Update the specific property
-        }).catch(error => {
-            console.error(error);
-        });
+        }
     },
     methods: {
         toggle() {
             this.isActive = !this.isActive;
         }
     }
-};
+}
 </script>
-  
     
 <style scoped>
 * {
