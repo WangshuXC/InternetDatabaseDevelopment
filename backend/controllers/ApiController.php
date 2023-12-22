@@ -16,6 +16,7 @@
  * 增加了管理员登录的api
  * 更新了管理员登录的api
  * 增加了发布评论的api
+ * 增加了点击量增加的api
  */
 
 namespace app\controllers;
@@ -210,5 +211,20 @@ class ApiController extends Controller
         } else {
             return ['status' => -1, 'message' => '发布评论失败'];
         }
+    }
+
+    public function actionAddclick()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $contenttype = \Yii::$app->request->get('contenttype');
+        $contentID = \Yii::$app->request->get('contentID');
+
+        $click = Clicks::find()
+                ->where(['ContentType' => $contenttype])
+                ->andWhere(['ContentID' => $contentID])
+                ->one();
+
+        $click->ClickCount = $click->ClickCount + 1;
     }
 }
