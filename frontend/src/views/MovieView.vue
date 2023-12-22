@@ -63,7 +63,7 @@ export default {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-top: 6vh;
+    margin-top: 10vh;
     width: 100vw;
     height: auto;
 }

@@ -28,7 +28,8 @@ export default {
       const meta = this.$route.meta;
 
       return !meta || meta.showNavBar !== false;
-    }
+    },
+
   },
 }
 </script>
