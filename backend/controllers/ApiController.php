@@ -18,6 +18,7 @@
  * 增加了发布评论的api
  * 增加了点击量增加的api
  * 增加了获取个人信息的api和增加浏览量的api
+ * 增加了获取视频和文章页面总数的api
  */
 
 namespace app\controllers;
@@ -133,7 +134,7 @@ class ApiController extends Controller
         $intpage = (int)$page;
 
         // 查询数据库获取对应页数的文章信息
-        $articles = Articles::find()->select(['ArticleID', 'Title', 'Content', 'PublicationDate	'])->offset(15*($intpage-1))->limit(15)->all();
+        $articles = Articles::find()->select(['ArticleID', 'Title', 'Content', 'PublicationDate'])->offset(15*($intpage-1))->limit(15)->all();
 
         // 格式化为 JSON 并返回
         return $articles;
@@ -200,13 +201,13 @@ class ApiController extends Controller
                 ->all();
         } elseif ($vid !== null) {
             // 如果有 vid 参数，则查询指定 ArticleID 的评论信息
-            $comments = Videocomments::find()
+            $comments = Articlecomments::find()
                 ->select(['CommentID', 'ArticleID', 'Comment', 'CommentDate', 'Username'])
                 ->where(['ArticleID' => $vid])
                 ->all();
         } else {
             // 否则按照原来的逻辑查询分页数据
-            $comments = Videocomments::find()
+            $comments = Articlecomments::find()
                 ->select(['CommentID', 'ArticleID', 'Comment', 'CommentDate', 'Username'])
                 ->all();
         }
@@ -309,5 +310,30 @@ class ApiController extends Controller
         } else {
             return ['status' => -1, 'message' => '浏览量增加失败'];
         }
+    }
+
+    public function actionGetvideopagecount()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $count = Videos::find()->count();
+        $pagecount = intval($count / 18);
+
+        if($count % 18 !== 0){
+            $pagecount = $pagecount + 1;
+        }
+        return $pagecount;
+    }
+    public function actionGetarticlepagecount()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $count = Articles::find()->count();
+        $pagecount = intval($count / 18);
+
+        if($count % 18 !== 0){
+            $pagecount = $pagecount + 1;
+        }
+        return $pagecount;
     }
 }
