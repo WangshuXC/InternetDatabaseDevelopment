@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "personalinfo".
  *
  * @property string $Name
+ * @property string|null $Info
  * @property string|null $AvatarURL
  * @property string|null $Email
  * @property string|null $GitHubAccount
@@ -31,7 +32,7 @@ class Personalinfo extends \yii\db\ActiveRecord
         return [
             [['Name'], 'required'],
             [['Name', 'Email', 'GitHubAccount', 'WeChatID'], 'string', 'max' => 100],
-            [['AvatarURL'], 'string', 'max' => 255],
+            [['Info', 'AvatarURL'], 'string', 'max' => 255],
             [['Name'], 'unique'],
         ];
     }
@@ -43,6 +44,7 @@ class Personalinfo extends \yii\db\ActiveRecord
     {
         return [
             'Name' => 'Name',
+            'Info' => 'Info',
             'AvatarURL' => 'Avatar Url',
             'Email' => 'Email',
             'GitHubAccount' => 'Git Hub Account',

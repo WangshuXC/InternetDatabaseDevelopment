@@ -14,6 +14,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'Info')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'AvatarURL')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Email')->textInput(['maxlength' => true]) ?>
