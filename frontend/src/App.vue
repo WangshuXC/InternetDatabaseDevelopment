@@ -2,10 +2,11 @@
   <div v-if="show" class="App-Header">
     <NavBar></NavBar>
   </div>
-
-  <div class="App-Containner">
-    <router-view></router-view>
-  </div>
+  <transition name="fade">
+    <div class="App-Containner">
+      <router-view></router-view>
+    </div>
+  </transition>
 
   <div v-if="show" class="App-Footer">
     <WaveFoot></WaveFoot>
@@ -20,7 +21,7 @@ export default {
   name: 'App',
   components: {
     NavBar,
-    WaveFoot
+    WaveFoot,
   },
   computed: {
     show() {
@@ -48,4 +49,14 @@ html {
 }
 
 .App-Footer {}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

@@ -33,9 +33,12 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10vh;
     width: 100%;
+    min-height: 65vh;
 
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .webInfo1 {

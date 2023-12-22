@@ -24,7 +24,8 @@ const router = createRouter({
       name: 'movie',
       component: () => import('../views/MovieView.vue'),
       meta: {
-        showNavBar: true
+        showNavBar: true,
+        transition: 'fade'
       },
     },
     {
@@ -33,7 +34,8 @@ const router = createRouter({
       props: true,
       component: () => import('../views/MoviePlay.vue'),
       meta: {
-        showNavBar: true
+        showNavBar: true,
+        transition: 'fade'
       },
     },
     {

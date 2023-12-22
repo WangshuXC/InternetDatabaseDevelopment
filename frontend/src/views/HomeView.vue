@@ -31,7 +31,6 @@ export default {
 <template>
     <div class="homeContainer">
         <div class="timeLine">
-            <h1>核污染宣传，从你我做起</h1>
             <el-carousel :interval="3000" type="card" height="50vh" trigger="click">
                 <el-carousel-item v-for="(imagePath, index) in imagePaths" :key="index">
                     <img :src="imagePath" alt="pic">
@@ -49,10 +48,6 @@ export default {
     margin-top: 10vh;
 }
 
-.timeLine h1 {
-    color: white;
-    justify-content: center;
-}
 
 .timeLine img {
     max-width: 100%;
