@@ -48,6 +48,7 @@ export default {
         this.initPlayer()
         this.getUrl()
         this.getComments()
+        this.addClick()
     },
     methods: {
         initPlayer() {
@@ -91,6 +92,17 @@ export default {
                 })
                 .catch((error) => {
                     console.error('请求数据失败', error)
+                })
+        },
+        addClick() {
+            const id = this.$route.params.id
+            axios
+                .post('http://localhost:8080/api/addclick?contentID=' + id + "&contenttype=Video")
+                .then((response) => {
+
+                })
+                .catch((error) => {
+                    console.error('请求失败', error)
                 })
         },
         submitMessage() {

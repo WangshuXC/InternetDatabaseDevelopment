@@ -206,10 +206,10 @@ export default {
   background-color: #fff;
   border-radius: 10px;
   display: flex;
-  transition: 0.5s;
   opacity: 0;
   transform: scale(0);
   padding: 10px 20px;
+  transition: 0.5s;
   transition-delay: 0.2s;
 }
 

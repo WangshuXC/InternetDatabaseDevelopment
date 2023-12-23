@@ -8,6 +8,7 @@
  * 增加了用于注册和登录的api
  * 修改了评论查找的api，能够查找特定视频的评论，以及能够查找特定用户的评论
  * 修改了视频查找的api，能够根据VideoID获取视频信息
+ * 增加了获取网页点击率的api
  * 
  * Coding by FangYi 2112106
  * 增加了视频和评论的api及查找函数actionGetvideo和actionGetcomment
@@ -285,7 +286,7 @@ class ApiController extends Controller
         }
     }
 
-    //在视频播放页或文章详情页增加点击率的api
+    //在视频播放页或文章详情页增加点击量的api
     public function actionAddclick()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -336,6 +337,16 @@ class ApiController extends Controller
         } else {
             return ['status' => -1, 'message' => '浏览量增加失败'];
         }
+    }
+
+    //用于查询网站点击量的api
+    public function actionCheckwebviews()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $webviews = Webviews::find()->one();
+
+        return $webviews;
     }
 
     //用于获取视频总页数的api

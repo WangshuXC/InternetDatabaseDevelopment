@@ -1,9 +1,10 @@
 <script>
 import MenberBox from '../components/MenberBox.vue'
-
+import axios from 'axios'
 export default {
   data() {
     return {
+      views: 0,
       name1: '梁晓储',
       name2: '张昊星',
       name3: '方奕',
@@ -12,12 +13,27 @@ export default {
   },
   components: {
     MenberBox
+  },
+  mounted() {
+    this.checkViews()
+  },
+  methods: {
+    checkViews() {
+      axios.post('http://localhost:8080/api/checkwebviews')
+        .then((response) => {
+          this.views = response.data.Views
+        })
+        .catch((error) => {
+          console.error('请求失败', error)
+        })
+    }
   }
 }
 </script>
 
 <template>
   <div class="aboutContainer">
+    <h2>网站已经被访问了 {{ views }} 次，感谢您的宣传！</h2>
     <div class="webInfo1">
       <MenberBox :fullname="name1"></MenberBox>
       <MenberBox :fullname="name2"></MenberBox>

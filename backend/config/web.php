@@ -66,7 +66,8 @@ $config = [
                 'api/getpersonalinfo' => 'api/getpersonalinfo',
                 'api/addwebviews' => 'api/addwebviews',
                 'api/getvideopagecount' => 'api/getvideopagecount',
-                'api/getarticlepagecount' => 'api/getarticlepagecount'
+                'api/getarticlepagecount' => 'api/getarticlepagecount',
+                'api/checkwebviews' => 'api/checkwebviews',
             ],
         ],
         'response' => [

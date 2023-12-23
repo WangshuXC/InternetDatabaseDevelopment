@@ -11,37 +11,33 @@
             </div>
         </div>
 
-        <transition name="fade">
-            <div id="messageBoard" v-show="showMessageBoard" key="messageBoard1">
-                <div v-for="(msg, index) in messages1" :key="index" class="message">
-                    <div class="message-info">
-                        <div class="info">
-                            <router-link :to="'/article/' + msg.ArticleID">
-                                <strong>文章id：{{ msg.ArticleID }}</strong>
-                            </router-link>
-                        </div>
-                        <span>发布于: {{ msg.CommentDate }}</span>
+        <div id="messageBoard" v-show="showMessageBoard" key="messageBoard1">
+            <div v-for="(msg, index) in messages1" :style="{ '--i': index }" :key="index" class="message">
+                <div class="message-info">
+                    <div class="info">
+                        <router-link :to="'/article/' + msg.ArticleID">
+                            <strong>文章id：{{ msg.ArticleID }}</strong>
+                        </router-link>
                     </div>
-                    <div class="content">{{ msg.Comment }}</div>
+                    <span>发布于: {{ msg.CommentDate }}</span>
                 </div>
+                <div class="content">{{ msg.Comment }}</div>
             </div>
-        </transition>
+        </div>
 
-        <transition name="fade">
-            <div id="messageBoard" v-show="showMessageBoard">
-                <div v-for="(msg, index) in messages2" :key="index" class="message">
-                    <div class="message-info">
-                        <div class="info">
-                            <router-link :to="'/movie/' + msg.VideoID">
-                                <strong>视频id：{{ msg.VideoID }}</strong>
-                            </router-link>
-                        </div>
-                        <span>发布于: {{ msg.CommentDate }}</span>
+        <div id="messageBoard" v-show="showMessageBoard">
+            <div v-for="(msg, index) in messages2" :style="{ '--i': index }" :key="index" class="message">
+                <div class="message-info">
+                    <div class="info">
+                        <router-link :to="'/movie/' + msg.VideoID">
+                            <strong>视频id：{{ msg.VideoID }}</strong>
+                        </router-link>
                     </div>
-                    <div class="content">{{ msg.Comment }}</div>
+                    <span>发布于: {{ msg.CommentDate }}</span>
                 </div>
+                <div class="content">{{ msg.Comment }}</div>
             </div>
-        </transition>
+        </div>
 
         <el-backtop :right="100" :bottom="100" />
     </div>
@@ -101,16 +97,6 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 1s;
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0;
-}
-
 .userContainer {
     display: flex;
     justify-content: center;
@@ -181,6 +167,21 @@ export default {
     height: auto;
     text-align: left;
     margin-top: 5vh;
+
+    transition: opacity 0.5s ease;
+    opacity: 1;
+}
+
+@keyframes messageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .message {
@@ -194,6 +195,8 @@ export default {
     border-radius: 10px;
     box-shadow: 0 10px 20px #00000026;
     text-shadow: 0px 0px 20px #ffffff;
+
+    animation: messageFadeIn 0.5s ease forwards;
 }
 
 .message-info {

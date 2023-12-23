@@ -65,6 +65,17 @@ export default {
                     console.error('请求数据失败', error)
                 })
         },
+        addClick() {
+            const id = this.$route.params.id
+            axios
+                .post('http://localhost:8080/api/addclick?contentID=' + id + "&contenttype=Article")
+                .then((response) => {
+
+                })
+                .catch((error) => {
+                    console.error('请求失败', error)
+                })
+        },
         submitMessage() {
             const username = sessionStorage.getItem('Username')
             const id = this.$route.params.id
