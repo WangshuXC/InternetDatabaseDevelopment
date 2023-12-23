@@ -1,11 +1,5 @@
 <?php
 
-
-/**
- * Team: LFZW,NKU
- * Coding by 
- * 
- */
 namespace app\models;
 
 use Yii;
@@ -17,8 +11,10 @@ use Yii;
  * @property string $Username
  * @property string $Password
  *
- * @property Articles[] $articles
+ * @property Admins[] $admins
+ * @property Articlecomments[] $articlecomments
  * @property Comments[] $comments
+ * @property Videocomments[] $videocomments
  */
 class Users extends \yii\db\ActiveRecord
 {
@@ -56,13 +52,23 @@ class Users extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Articles]].
+     * Gets query for [[Admins]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getArticles()
+    public function getAdmins()
     {
-        return $this->hasMany(Articles::class, ['AuthorID' => 'UserID']);
+        return $this->hasMany(Admins::class, ['Username' => 'Username']);
+    }
+
+    /**
+     * Gets query for [[Articlecomments]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticlecomments()
+    {
+        return $this->hasMany(Articlecomments::class, ['Username' => 'Username']);
     }
 
     /**
@@ -72,6 +78,16 @@ class Users extends \yii\db\ActiveRecord
      */
     public function getComments()
     {
-        return $this->hasMany(Comments::class, ['UserID' => 'UserID']);
+        return $this->hasMany(Comments::class, ['Username' => 'Username']);
+    }
+
+    /**
+     * Gets query for [[Videocomments]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVideocomments()
+    {
+        return $this->hasMany(Videocomments::class, ['Username' => 'Username']);
     }
 }

@@ -116,7 +116,7 @@ class ApiController extends Controller
                 // 用户名和密码匹配
                 // 检查用户是否为管理员
                 $admin = Admins::find()
-                    ->where(['Username' => $user->username])
+                    ->where(['Username' => $user->Username])
                     ->one();
                 if($admin !== null){
                     return ['status' => 1];
@@ -299,6 +299,12 @@ class ApiController extends Controller
                 ->andWhere(['ContentID' => $contentID])
                 ->one();
 
+        if($click == null){
+            $click = new Clicks();
+            $click->ContentType = $contenttype;
+            $click->ContentID = $contentID;
+            $click->ClickCount = 0;
+        }
         $click->ClickCount = $click->ClickCount + 1;
 
         if ($click->save()) {
