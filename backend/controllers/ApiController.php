@@ -36,7 +36,8 @@ use app\models\Webviews;
 
 
 class ApiController extends Controller
-{
+{   
+    //用于登录的api
     public function actionLogin()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -59,6 +60,8 @@ class ApiController extends Controller
             }
         }
     }
+
+    //用于注册的api
     public function actionSignup()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -93,6 +96,8 @@ class ApiController extends Controller
             }
         }
     }
+
+    //用于判断管理员登录的api
     public function actionAdminlogin()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -124,7 +129,7 @@ class ApiController extends Controller
         }
     }
 
-
+    //用于文章页面获取文章的api
     public function actionGetarticle()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -143,6 +148,8 @@ class ApiController extends Controller
         // 格式化为 JSON 并返回
         return $articles;
     }
+
+    //用于视频页面获取视频的api
     public function actionGetvideo()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -163,6 +170,8 @@ class ApiController extends Controller
         // 格式化为 JSON 并返回
         return $videos;
     }
+
+    //用于视频播放页获取评论的api
     public function actionGetvideocomment()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -191,6 +200,8 @@ class ApiController extends Controller
         // 格式化为 JSON 并返回
         return $comments;
     }
+
+    //用于文章详情页获取文章的api
     public function actionGetarticlecomment()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -219,6 +230,8 @@ class ApiController extends Controller
         // 格式化为 JSON 并返回
         return $comments;
     }
+
+    //查询点击量的api
     public function actionGetclick()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -230,6 +243,7 @@ class ApiController extends Controller
         return $clicks;
     }
 
+    //在视频播放页添加评论的api
     public function actionAddvideocomment()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -250,6 +264,7 @@ class ApiController extends Controller
         }
     }
 
+    //在文章详情页添加评论的api
     public function actionAddarticlecomment()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -270,6 +285,7 @@ class ApiController extends Controller
         }
     }
 
+    //在视频播放页或文章详情页增加点击率的api
     public function actionAddclick()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -291,6 +307,7 @@ class ApiController extends Controller
         }
     }
 
+    //关于页面获取小组成员信息的api
     public function actionGetpersonalinfo()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -306,6 +323,7 @@ class ApiController extends Controller
         return $personalinfo;
     }
 
+    //用于添加网站点击量的api
     public function actionAddwebviews()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -320,6 +338,7 @@ class ApiController extends Controller
         }
     }
 
+    //用于获取视频总页数的api
     public function actionGetvideopagecount()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -334,6 +353,8 @@ class ApiController extends Controller
         $pagecount=json_encode($pagecount);
         return $pagecount;
     }
+
+    //用于获取文章总页数的api
     public function actionGetarticlepagecount()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

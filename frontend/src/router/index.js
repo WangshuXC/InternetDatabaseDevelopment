@@ -9,7 +9,7 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue'),
       meta: {
         showNavBar: false
-      },
+      }
     },
     {
       path: '/',
@@ -17,7 +17,7 @@ const router = createRouter({
       component: () => import('../views/HomeView.vue'),
       meta: {
         showNavBar: true
-      },
+      }
     },
     {
       path: '/movie',
@@ -26,7 +26,7 @@ const router = createRouter({
       meta: {
         showNavBar: true,
         transition: 'fade'
-      },
+      }
     },
     {
       path: '/movie/:id',
@@ -36,7 +36,7 @@ const router = createRouter({
       meta: {
         showNavBar: true,
         transition: 'fade'
-      },
+      }
     },
     {
       path: '/article',
@@ -44,7 +44,7 @@ const router = createRouter({
       component: () => import('../views/ArticleView.vue'),
       meta: {
         showNavBar: true
-      },
+      }
     },
     {
       path: '/article/:id',
@@ -52,7 +52,7 @@ const router = createRouter({
       component: () => import('../views/ArticlePlay.vue'),
       meta: {
         showNavBar: true
-      },
+      }
     },
     {
       path: '/user',
@@ -60,7 +60,7 @@ const router = createRouter({
       component: () => import('../views/UserView.vue'),
       meta: {
         showNavBar: true
-      },
+      }
     },
     {
       path: '/about',
@@ -68,7 +68,7 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
       meta: {
         showNavBar: true
-      },
+      }
     },
     {
       path: '/admin',
@@ -76,29 +76,29 @@ const router = createRouter({
       component: () => import('../views/AdminView.vue'),
       meta: {
         showNavBar: false
-      },
+      }
     },
     {
-      path: "/:path(.*)",
+      path: '/:path(.*)',
       name: 'NotFound',
       meta: {
         showNavBar: false
       },
       component: () => import('../views/NotFoundView.vue')
-    },
+    }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  const Username = sessionStorage.getItem('Username');
-  const Password = sessionStorage.getItem('Password');
+  const Username = sessionStorage.getItem('Username')
+  const Password = sessionStorage.getItem('Password')
 
   // 检查 Session Storage 中的值
   if (!Username && !Password && to.path !== '/login') {
-    next('/login');
+    next('/login')
   } else {
-    next();
+    next()
   }
-});
+})
 
 export default router

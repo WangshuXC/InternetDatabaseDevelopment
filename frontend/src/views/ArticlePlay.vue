@@ -25,75 +25,77 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
     data() {
         return {
-            title: "",
-            content: "",
-            messages: [
-            ]
+            title: '',
+            content: '',
+            messages: []
         }
     },
-    components: {
-    },
+    components: {},
     mounted() {
-        this.getUrl();
-        this.getComments();
+        this.getUrl()
+        this.getComments()
     },
     methods: {
         getUrl() {
-            const id = this.$route.params.id;
-            axios.post('http://10.130.26.91:8080/api/getarticle?id=' + id)
-                .then(response => {
-                    this.title = response.data.Title;
-                    this.content = response.data.Content;
+            const id = this.$route.params.id
+            axios
+                .post('http://localhost:8080/api/getarticle?id=' + id)
+                .then((response) => {
+                    this.title = response.data.Title
+                    this.content = response.data.Content
                     console.log(this.title)
                 })
-                .catch(error => {
-                    console.error('请求数据失败', error);
-                });
+                .catch((error) => {
+                    console.error('请求数据失败', error)
+                })
         },
         getComments() {
-            const id = this.$route.params.id;
-            axios.post('http://10.130.26.91:8080/api/getarticlecomment?vid=' + id)
-                .then(response => {
-                    this.messages = response.data;
+            const id = this.$route.params.id
+            axios
+                .post('http://localhost:8080/api/getarticlecomment?vid=' + id)
+                .then((response) => {
+                    this.messages = response.data
                 })
-                .catch(error => {
-                    console.error('请求数据失败', error);
-                });
+                .catch((error) => {
+                    console.error('请求数据失败', error)
+                })
         },
         submitMessage() {
-            const username = sessionStorage.getItem('Username');
-            const id = this.$route.params.id;
+            const username = sessionStorage.getItem('Username')
+            const id = this.$route.params.id
             if (this.message) {
-                const url = `http://10.130.26.91:8080/api/addarticlecomment?username=${username}&comment=${encodeURIComponent(this.message)}&articleID=${id}`;
-                axios.post(url)
-                    .then(response => {
-                        const status = response.data.status;
+                const url = `http://localhost:8080/api/addarticlecomment?username=${username}&comment=${encodeURIComponent(
+                    this.message
+                )}&articleID=${id}`
+                axios
+                    .post(url)
+                    .then((response) => {
+                        const status = response.data.status
                         if (status === -1) {
-                            this.$message.error('添加评论失败');
-                        }
-                        else {
-                            this.message = '';
-                            this.getComments();
+                            this.$message.error('添加评论失败')
+                        } else {
+                            this.message = ''
+                            this.getComments()
                         }
                     })
-                    .catch(error => {
-                        console.error('发送数据失败', error);
-                        this.$message.error('添加评论失败2');
-                    });
+                    .catch((error) => {
+                        console.error('发送数据失败', error)
+                        this.$message.error('添加评论失败2')
+                    })
             } else {
-                this.$message.error('请填写留言内容！');
+                this.$message.error('请填写留言内容！')
             }
         }
-    },
-};
+    }
+}
 </script>
 
-<style>
+<style scoped>
 .ArticleContainer {
     display: flex;
     flex-direction: column;
@@ -182,7 +184,7 @@ export default {
     letter-spacing: 5px;
     width: 10vw;
     height: 5vh;
-    border-radius: 50PX;
+    border-radius: 50px;
 }
 
 #messageBoard {

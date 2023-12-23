@@ -5,7 +5,9 @@
             <div class="Info">
                 <strong>{{ username }}</strong>
                 <button @click="clearSession">取消登录</button>
-                <button @click="toggleMessageBoard" id="checkcom">{{ showMessageBoard ? '隐藏评论' : '查看评论' }}</button>
+                <button @click="toggleMessageBoard" id="checkcom">
+                    {{ showMessageBoard ? '隐藏评论' : '查看评论' }}
+                </button>
             </div>
         </div>
 
@@ -14,7 +16,7 @@
                 <div v-for="(msg, index) in messages1" :key="index" class="message">
                     <div class="message-info">
                         <div class="info">
-                            <router-link :to="'/article/' + msg.VideoID">
+                            <router-link :to="'/article/' + msg.ArticleID">
                                 <strong>文章id：{{ msg.ArticleID }}</strong>
                             </router-link>
                         </div>
@@ -46,59 +48,59 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 export default {
     data() {
         return {
             username: '',
             showMessageBoard: false,
-            messages1: [
-            ],
-            messages2: [
-            ],
+            messages1: [],
+            messages2: []
         }
     },
     mounted() {
-        const username = sessionStorage.getItem('Username');
+        const username = sessionStorage.getItem('Username')
         if (username) {
-            this.username = username;
-        };
-        this.getAComments();
-        this.getVComments();
+            this.username = username
+        }
+        this.getAComments()
+        this.getVComments()
     },
     methods: {
         clearSession() {
-            sessionStorage.clear();
-            window.location.href = '/login';
+            sessionStorage.clear()
+            window.location.href = '/login'
         },
         getAComments() {
-            axios.post('http://10.130.26.91:8080/api/getarticlecomment?username=' + this.username)
-                .then(response => {
-                    this.messages1 = response.data;
+            axios
+                .post('http://localhost:8080/api/getarticlecomment?username=' + this.username)
+                .then((response) => {
+                    this.messages1 = response.data
                 })
-                .catch(error => {
-                    console.error('请求失败:', error);
-                    this.$message.error('请求失败');
-                });
+                .catch((error) => {
+                    console.error('请求失败:', error)
+                    this.$message.error('请求失败')
+                })
         },
         getVComments() {
-            axios.post('http://10.130.26.91:8080/api/getvideocomment?username=' + this.username)
-                .then(response => {
-                    this.messages2 = response.data;
+            axios
+                .post('http://localhost:8080/api/getvideocomment?username=' + this.username)
+                .then((response) => {
+                    this.messages2 = response.data
                 })
-                .catch(error => {
-                    console.error('请求失败:', error);
-                    this.$message.error('请求失败');
-                });
+                .catch((error) => {
+                    console.error('请求失败:', error)
+                    this.$message.error('请求失败')
+                })
         },
         toggleMessageBoard() {
-            this.showMessageBoard = !this.showMessageBoard;
+            this.showMessageBoard = !this.showMessageBoard
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 1s;
@@ -162,13 +164,12 @@ export default {
     letter-spacing: 5px;
     width: 10vw;
     height: 4vh;
-    border-radius: 50PX;
+    border-radius: 50px;
 }
 
 #checkcom {
     margin-bottom: -10vh;
 }
-
 
 #messageBoard {
     display: flex;

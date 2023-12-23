@@ -1,11 +1,9 @@
 <script>
+
 </script>
 
 <template>
-    <p>
-        this is admin page
-    </p>
+  <p>this is admin page</p>
 </template>
-
 
 <style></style>
