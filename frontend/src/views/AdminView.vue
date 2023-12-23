@@ -22,7 +22,9 @@ export default {
           const status = response.data.status
           if (status === 1) {
             this.$message.success('验证成功')
-            window.location.href = 'http://localhost:8080/'
+            setTimeout(() => {
+              window.location.href = 'http://localhost:8080/'
+            }, 1000)
           } else if (status === 0) {
             // 注册失败
             this.$message.error('验证失败')
@@ -38,7 +40,16 @@ export default {
 </script>
 
 <template>
-  <p>this is admin page</p>
+  <div class="admin">管理员验证界面</div>
 </template>
 
-<style></style>
+<style>
+.admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
