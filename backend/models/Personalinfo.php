@@ -31,8 +31,9 @@ class Personalinfo extends \yii\db\ActiveRecord
     {
         return [
             [['Name'], 'required'],
+            [['Info'], 'string'],
             [['Name', 'Email', 'GitHubAccount', 'WeChatID'], 'string', 'max' => 100],
-            [['Info', 'AvatarURL'], 'string', 'max' => 255],
+            [['AvatarURL'], 'string', 'max' => 255],
             [['Name'], 'unique'],
         ];
     }
