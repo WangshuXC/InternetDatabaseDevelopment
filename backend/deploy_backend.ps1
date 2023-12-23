@@ -1,20 +1,15 @@
-# 提示用户输入密码
-$password = Read-Host "Please enter the mysql password" -AsSecureString
+# 获取用户输入的mysql密码
+$mysql_password = Read-Host "Please input the mysql password"
 
-# 读取数据库配置文件内容
-$configFile = ".\config\db.php"
-$configContent = Get-Content $configFile -Raw
+# 替换db.php中的mysql密码
+$config_file_path = "./config/db.php"
+(Get-Content $config_file_path) | ForEach-Object { $_ -replace "'password' => 'root'", "'password' => '$mysql_password'" } | Set-Content $config_file_path
 
-# 替换密码
-$newConfigContent = $configContent -replace "'password' => 'root'", "'password' => '$password'"
+# 返回脚本文件所在目录
+cd ..
 
-# 写入更新后的配置内容
-Set-Content -Path $configFile -Value $newConfigContent
+# 运行composer install
+composer install
 
-Write-Host "Password updated successfully!"
-
-Write-Host "正在安装后端服务器依赖..."
-composer install --silent 2>&1 | Out-Null
-
-Write-Host "正在安装后端服务器依赖..."
+# 运行php yii serve
 php yii serve
