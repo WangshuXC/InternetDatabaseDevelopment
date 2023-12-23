@@ -17,6 +17,7 @@ export default {
   },
   mounted() {
     this.checkViews()
+    this.getInfo()
   },
   methods: {
     checkViews() {
@@ -46,8 +47,7 @@ export default {
     <h2>网站已经被访问了 {{ views }} 次，感谢您的宣传！</h2>
     <div class="webInfo0">
       <h2>关于网站</h2>
-      <div class="Info0">
-
+      <div class="Info0" v-html="Info">
       </div>
     </div>
 
@@ -92,8 +92,13 @@ export default {
 
 .Info0 {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+
   background-color: white;
   border-radius: 15px;
+  padding: 20px;
 
   margin-top: 3vh;
   margin-bottom: 3vh;

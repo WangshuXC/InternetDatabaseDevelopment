@@ -6,11 +6,16 @@
             </video>
         </div>
 
+        <div class="like">
+            <div class="likeNum">{{ likeNum }}个点赞👍</div>
+            <div class="vtime">{{ videoTime }}</div>
+        </div>
+
         <div class="videoInfo">
             <p>{{ videoInfo }}</p>
         </div>
 
-        <LikeBtn :id="id"></LikeBtn>
+        <LikeBtn :id="id" :type="v" @click="getLikeNum()"></LikeBtn>
 
         <div class="CommentContainer">
             <div class="CommentForm">
@@ -42,9 +47,12 @@ export default {
     data() {
         return {
             videoSrc: '',
+            videoTime: '',
             videoInfo: '',
+            likeNum: '',
             messages: [],
             id: '',
+            v: 'v'
         }
     },
     components: {
@@ -55,6 +63,7 @@ export default {
         this.getUrl()
         this.getComments()
         this.addClick()
+        this.getLikeNum()
         this.id = this.$route.params.id
     },
     methods: {
@@ -75,16 +84,27 @@ export default {
         },
         getUrl() {
             const id = this.$route.params.id
-            // 向后端发送登录请求
             axios
                 .post('http://localhost:8080/api/getvideo?id=' + id)
                 .then((response) => {
                     this.videoSrc = response.data.VideoURL
                     this.videoInfo = response.data.Description
+                    this.videoTime = response.data.UploadDate
                     this.player.source = {
                         type: 'video',
                         sources: [{ src: this.videoSrc, type: 'video/mp4' }]
                     }
+                })
+                .catch((error) => {
+                    console.error('请求数据失败', error)
+                })
+        },
+        getLikeNum() {
+            const id = this.$route.params.id
+            axios
+                .post('http://localhost:8080/api/getvideolikes?videoID=' + id)
+                .then((response) => {
+                    this.likeNum = response.data
                 })
                 .catch((error) => {
                     console.error('请求数据失败', error)
@@ -156,6 +176,15 @@ export default {
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.7);
     padding: 20px;
+}
+
+.like {
+    display: flex;
+    width: 100%;
+    margin-top: 4vh;
+    margin-bottom: 0;
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 .videoInfo {

@@ -8,7 +8,8 @@
  * 增加了用于注册和登录的api
  * 修改了评论查找的api，能够查找特定视频的评论，以及能够查找特定用户的评论
  * 修改了视频查找的api，能够根据VideoID获取视频信息
- * 增加了获取网页点击率的api
+ * 增加了获取网页点击量的api
+ * 修改了获取和增加视频和文章点赞量的api，能够增加特定值
  * 
  * Coding by FangYi 2112106
  * 增加了视频和评论的api及查找函数actionGetvideo和actionGetcomment
@@ -442,6 +443,7 @@ class ApiController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         $videoID = \Yii::$app->request->get('videoID');
+        $num = \Yii::$app->request->get('num');
         
         $likes = Videolikes::find()
             ->where(['VideoID' => $videoID])
@@ -454,7 +456,7 @@ class ApiController extends Controller
             $likes->save();
         }
 
-        $likes->Likes = $likes->Likes + 1;
+        $likes->Likes = $likes->Likes + $num;
         if ($likes->save()) {
             return ['status' => 1, 'message' => '点赞量增加成功'];
         } else {
@@ -468,6 +470,7 @@ class ApiController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         $articleID = \Yii::$app->request->get('articleID');
+        $num = \Yii::$app->request->get('num');
         
         $likes = Articlelikes::find()
             ->where(['ArticleID' => $articleID])
@@ -480,7 +483,7 @@ class ApiController extends Controller
             $likes->save();
         }
 
-        $likes->Likes = $likes->Likes + 1;
+        $likes->Likes = $likes->Likes + $num;
         if ($likes->save()) {
             return ['status' => 1, 'message' => '点赞量增加成功'];
         } else {

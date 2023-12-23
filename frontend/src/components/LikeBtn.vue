@@ -1,8 +1,11 @@
 <template>
-    <div class="likebtn" @mouseover="startTimer" @mouseleave="resetTimer">{{ buttonText }}</div>
+    <div class="likebtn" @mouseover="startTimer" @mouseleave="resetTimer" @click="addLikenum(this.likeCount)">{{ buttonText
+    }}
+    </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -12,6 +15,10 @@ export default {
     },
     props: {
         id: {
+            type: String,
+            required: true
+        },
+        type: {
             type: String,
             required: true
         }
@@ -37,9 +44,27 @@ export default {
         },
         resetTimer() {
             clearTimeout(this.timerId);
-
             this.likeCount = 1;
         },
+        addLikenum(num) {
+            const id = this.$route.params.id
+            if (this.type === 'v') {
+                const url = "http://localhost:8080/api/addvideolikes?videoID=";
+                axios
+                    .post(url + id + '&num=' + num)
+                    .catch((error) => {
+                        console.error('发送数据失败', error)
+                    })
+            }
+            else if (this.type === 'a') {
+                const url = "http://localhost:8080/api/addarticlelikes?articleID=";
+                axios
+                    .post(url + id + '&num=' + num)
+                    .catch((error) => {
+                        console.error('发送数据失败', error)
+                    })
+            }
+        }
     },
 };
 </script>
@@ -102,4 +127,3 @@ export default {
     background-color: rgba(0, 114, 253, 0.75);
 }
 </style>
-  

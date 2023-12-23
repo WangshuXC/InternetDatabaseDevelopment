@@ -4,7 +4,13 @@
             <h2 class="ArticleTitle">{{ title }}</h2>
             <div v-html="content" />
         </div>
-        <LikeBtn :id="id"></LikeBtn>
+        <div class="like">
+            <div class="likeNum"><strong>{{ likeNum }}</strong>
+                <p>个点赞👍</p>
+            </div>
+            <div class="vtime">{{ articleTime }}</div>
+        </div>
+        <LikeBtn :id="id" :type="a" @click="getLikeNum()"></LikeBtn>
         <div class="CommentContainer">
             <div class="CommentForm">
                 <textarea v-model="message" placeholder="留言内容"></textarea>
@@ -33,8 +39,11 @@ export default {
         return {
             title: '',
             content: '',
+            articleTime: '',
+            likeNum: '',
             messages: [],
             id: '',
+            a: 'a'
         }
     },
     components: {
@@ -44,6 +53,7 @@ export default {
         this.getUrl()
         this.getComments()
         this.addClick()
+        this.getLikeNum()
         this.id = this.$route.params.id
     },
     methods: {
@@ -54,7 +64,19 @@ export default {
                 .then((response) => {
                     this.title = response.data.Title
                     this.content = response.data.Content
+                    this.articleTime = response.data.PublicationDate
                     console.log(this.title)
+                })
+                .catch((error) => {
+                    console.error('请求数据失败', error)
+                })
+        },
+        getLikeNum() {
+            const id = this.$route.params.id
+            axios
+                .post('http://localhost:8080/api/getarticlelikes?articleID=' + id)
+                .then((response) => {
+                    this.likeNum = response.data
                 })
                 .catch((error) => {
                     console.error('请求数据失败', error)
@@ -132,6 +154,25 @@ export default {
     border-radius: 15px;
     padding: 20px;
     width: 100%;
+}
+
+.like {
+    display: flex;
+    width: 100%;
+    margin-top: 4vh;
+    margin-bottom: 0;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.likeNum {
+    display: flex;
+}
+
+.likeNum strong {
+    color: white;
+    font-size: larger;
+    margin-right: 2px;
 }
 
 .left_zw {

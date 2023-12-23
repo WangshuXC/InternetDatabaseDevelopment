@@ -6,7 +6,7 @@
       <h1>{{ title }}</h1>
 
       <div class="infos">
-        <span>·&nbsp;&nbsp;{{ time }}&nbsp;&nbsp;·&nbsp;&nbsp;3h12</span>
+        <span>·&nbsp;&nbsp;{{ time }}</span>
       </div>
 
       <p class="synopsis">
@@ -84,7 +84,7 @@ img {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   transition: transform var(--transition-duration) var(--ease-in-out);
 
-  > * {
+  >* {
     position: relative;
     will-change: transform;
   }
