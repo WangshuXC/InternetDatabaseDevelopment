@@ -1,11 +1,5 @@
 <?php
 
-
-/**
- * Team: LFZW,NKU
- * Coding by 
- * 
- */
 namespace app\controllers;
 
 use app\models\Users;
