@@ -5,110 +5,98 @@
             <div class="Info">
                 <strong>{{ username }}</strong>
                 <button @click="clearSession">取消登录</button>
-                <button @click="toggleMessageBoard" id="checkcom">{{ showMessageBoard ? '隐藏评论' : '查看评论' }}</button>
+                <button @click="toggleMessageBoard" id="checkcom">
+                    {{ showMessageBoard ? '隐藏评论' : '查看评论' }}
+                </button>
             </div>
         </div>
 
-        <transition name="fade">
-            <div id="messageBoard" v-show="showMessageBoard" key="messageBoard1">
-                <div v-for="(msg, index) in messages1" :key="index" class="message">
-                    <div class="message-info">
-                        <div class="info">
-                            <router-link :to="'/article/' + msg.VideoID">
-                                <strong>文章id：{{ msg.ArticleID }}</strong>
-                            </router-link>
-                        </div>
-                        <span>发布于: {{ msg.CommentDate }}</span>
+        <div id="messageBoard" v-show="showMessageBoard" key="messageBoard1">
+            <div v-for="(msg, index) in messages1" :style="{ '--i': index }" :key="index" class="message">
+                <div class="message-info">
+                    <div class="info">
+                        <router-link :to="'/article/' + msg.ArticleID">
+                            <strong>文章id：{{ msg.ArticleID }}</strong>
+                        </router-link>
                     </div>
-                    <div class="content">{{ msg.Comment }}</div>
+                    <span>发布于: {{ msg.CommentDate }}</span>
                 </div>
+                <div class="content">{{ msg.Comment }}</div>
             </div>
-        </transition>
+        </div>
 
-        <transition name="fade">
-            <div id="messageBoard" v-show="showMessageBoard">
-                <div v-for="(msg, index) in messages2" :key="index" class="message">
-                    <div class="message-info">
-                        <div class="info">
-                            <router-link :to="'/movie/' + msg.VideoID">
-                                <strong>视频id：{{ msg.VideoID }}</strong>
-                            </router-link>
-                        </div>
-                        <span>发布于: {{ msg.CommentDate }}</span>
+        <div id="messageBoard" v-show="showMessageBoard">
+            <div v-for="(msg, index) in messages2" :style="{ '--i': index }" :key="index" class="message">
+                <div class="message-info">
+                    <div class="info">
+                        <router-link :to="'/movie/' + msg.VideoID">
+                            <strong>视频id：{{ msg.VideoID }}</strong>
+                        </router-link>
                     </div>
-                    <div class="content">{{ msg.Comment }}</div>
+                    <span>发布于: {{ msg.CommentDate }}</span>
                 </div>
+                <div class="content">{{ msg.Comment }}</div>
             </div>
-        </transition>
+        </div>
 
         <el-backtop :right="100" :bottom="100" />
     </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 export default {
     data() {
         return {
             username: '',
             showMessageBoard: false,
-            messages1: [
-            ],
-            messages2: [
-            ],
+            messages1: [],
+            messages2: []
         }
     },
     mounted() {
-        const username = sessionStorage.getItem('Username');
+        const username = sessionStorage.getItem('Username')
         if (username) {
-            this.username = username;
-        };
-        this.getAComments();
-        this.getVComments();
+            this.username = username
+        }
+        this.getAComments()
+        this.getVComments()
     },
     methods: {
         clearSession() {
-            sessionStorage.clear();
-            window.location.href = '/login';
+            sessionStorage.clear()
+            window.location.href = '/login'
         },
         getAComments() {
-            axios.post('http://10.130.26.91:8080/api/getarticlecomment?username=' + this.username)
-                .then(response => {
-                    this.messages1 = response.data;
+            axios
+                .post('http://localhost:8080/api/getarticlecomment?username=' + this.username)
+                .then((response) => {
+                    this.messages1 = response.data
                 })
-                .catch(error => {
-                    console.error('请求失败:', error);
-                    this.$message.error('请求失败');
-                });
+                .catch((error) => {
+                    console.error('请求失败:', error)
+                    this.$message.error('请求失败')
+                })
         },
         getVComments() {
-            axios.post('http://10.130.26.91:8080/api/getvideocomment?username=' + this.username)
-                .then(response => {
-                    this.messages2 = response.data;
+            axios
+                .post('http://localhost:8080/api/getvideocomment?username=' + this.username)
+                .then((response) => {
+                    this.messages2 = response.data
                 })
-                .catch(error => {
-                    console.error('请求失败:', error);
-                    this.$message.error('请求失败');
-                });
+                .catch((error) => {
+                    console.error('请求失败:', error)
+                    this.$message.error('请求失败')
+                })
         },
         toggleMessageBoard() {
-            this.showMessageBoard = !this.showMessageBoard;
+            this.showMessageBoard = !this.showMessageBoard
         }
     }
 }
 </script>
 
-<style>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 1s;
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0;
-}
-
+<style scoped>
 .userContainer {
     display: flex;
     justify-content: center;
@@ -162,13 +150,12 @@ export default {
     letter-spacing: 5px;
     width: 10vw;
     height: 4vh;
-    border-radius: 50PX;
+    border-radius: 50px;
 }
 
 #checkcom {
     margin-bottom: -10vh;
 }
-
 
 #messageBoard {
     display: flex;
@@ -180,6 +167,21 @@ export default {
     height: auto;
     text-align: left;
     margin-top: 5vh;
+
+    transition: opacity 0.5s ease;
+    opacity: 1;
+}
+
+@keyframes messageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .message {
@@ -193,6 +195,8 @@ export default {
     border-radius: 10px;
     box-shadow: 0 10px 20px #00000026;
     text-shadow: 0px 0px 20px #ffffff;
+
+    animation: messageFadeIn 0.5s ease forwards;
 }
 
 .message-info {
