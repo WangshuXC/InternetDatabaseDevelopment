@@ -69,7 +69,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .homeContainer {
   display: flex;
   flex-direction: column;
@@ -97,6 +97,7 @@ export default {
   height: auto;
   display: block;
 }
+
 
 .videoPlayer {
   display: flex;

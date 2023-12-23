@@ -10,6 +10,8 @@
             <p>{{ videoInfo }}</p>
         </div>
 
+        <LikeBtn :id="id"></LikeBtn>
+
         <div class="CommentContainer">
             <div class="CommentForm">
                 <textarea v-model="message" placeholder="留言内容"></textarea>
@@ -34,21 +36,26 @@
 import Plyr from 'plyr'
 import 'plyr/dist/plyr.css'
 import axios from 'axios'
+import LikeBtn from '../components/LikeBtn.vue';
 
 export default {
     data() {
         return {
             videoSrc: '',
             videoInfo: '',
-            messages: []
+            messages: [],
+            id: '',
         }
     },
-    components: {},
+    components: {
+        LikeBtn,
+    },
     mounted() {
         this.initPlayer()
         this.getUrl()
         this.getComments()
         this.addClick()
+        this.id = this.$route.params.id
     },
     methods: {
         initPlayer() {
@@ -98,9 +105,6 @@ export default {
             const id = this.$route.params.id
             axios
                 .post('http://localhost:8080/api/addclick?contentID=' + id + "&contenttype=Video")
-                .then((response) => {
-
-                })
                 .catch((error) => {
                     console.error('请求失败', error)
                 })

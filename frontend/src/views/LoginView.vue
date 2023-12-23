@@ -1,5 +1,4 @@
 <script>
-import { ElMessage } from 'element-plus'
 import axios from 'axios'
 export default {
   data() {
@@ -37,7 +36,15 @@ export default {
       const password = this.registerData.password
 
       if (this.registerData.password !== this.registerData.confirmPassword) {
-        ElMessage.error('密码和确认密码不一致')
+        this.$message.error('密码和确认密码不一致')
+        return
+      }
+
+      // 密码要求的正则表达式
+      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+
+      if (!passwordPattern.test(password)) {
+        this.$message.error('密码至少为8位数，并且要包含大小写字母数字数')
         return
       }
 

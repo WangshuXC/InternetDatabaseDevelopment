@@ -4,6 +4,7 @@
             <h2 class="ArticleTitle">{{ title }}</h2>
             <div v-html="content" />
         </div>
+        <LikeBtn :id="id"></LikeBtn>
         <div class="CommentContainer">
             <div class="CommentForm">
                 <textarea v-model="message" placeholder="留言内容"></textarea>
@@ -26,19 +27,24 @@
 
 <script>
 import axios from 'axios'
-
+import LikeBtn from '../components/LikeBtn.vue';
 export default {
     data() {
         return {
             title: '',
             content: '',
-            messages: []
+            messages: [],
+            id: '',
         }
     },
-    components: {},
+    components: {
+        LikeBtn,
+    },
     mounted() {
         this.getUrl()
         this.getComments()
+        this.addClick()
+        this.id = this.$route.params.id
     },
     methods: {
         getUrl() {
@@ -69,9 +75,6 @@ export default {
             const id = this.$route.params.id
             axios
                 .post('http://localhost:8080/api/addclick?contentID=' + id + "&contenttype=Article")
-                .then((response) => {
-
-                })
                 .catch((error) => {
                     console.error('请求失败', error)
                 })
@@ -106,7 +109,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .ArticleContainer {
     display: flex;
     flex-direction: column;
@@ -137,8 +140,15 @@ export default {
 }
 
 .left_zw p {
+    font-size: 3vh;
     margin-bottom: 1vh;
 }
+
+.left_zw img {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
 
 .pictext {
     color: rgb(187, 187, 187);

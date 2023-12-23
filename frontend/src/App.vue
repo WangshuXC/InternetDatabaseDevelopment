@@ -37,9 +37,8 @@ export default {
     AddWebView() {
       axios
         .post('http://localhost:8080/api/addwebviews')
-        .then((response) => { })
         .catch((error) => {
-          console.error('浏览量增加失败失败', error)
+          console.error('浏览量增加失败', error)
         })
     }
   }
