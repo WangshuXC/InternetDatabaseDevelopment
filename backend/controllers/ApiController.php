@@ -17,11 +17,14 @@
  * 增加了点击量的api
  * 增加了管理员登录的api
  * 更新了管理员登录的api
- * 增加了发布评论的api
- * 增加了点击量增加的api
- * 增加了获取个人信息的api和增加浏览量的api
  * 增加了获取视频和文章页面总数的api
  * 增加了获取和增加视频和文章点赞量的api
+ * 
+ * Coding by ZhangHaoxing 2113419
+ * 增加了发布评论的api
+ * 增加了点击量增加的api
+ * 增加了获取个人信息的api
+ * 增加浏览量的api
  */
 
 namespace app\controllers;
