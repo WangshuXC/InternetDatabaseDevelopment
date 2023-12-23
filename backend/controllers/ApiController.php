@@ -20,6 +20,7 @@
  * 增加了点击量增加的api
  * 增加了获取个人信息的api和增加浏览量的api
  * 增加了获取视频和文章页面总数的api
+ * 增加了获取和增加视频和文章点赞量的api
  */
 
 namespace app\controllers;
@@ -34,6 +35,8 @@ use app\models\Admins;
 use app\models\Clicks;
 use app\models\Personalinfo;
 use app\models\Webviews;
+use app\models\Videolikes;
+use app\models\Articlelikes;
 
 
 class ApiController extends Controller
@@ -385,5 +388,103 @@ class ApiController extends Controller
 
         $pagecount=json_encode($pagecount);
         return $pagecount;
+    }
+
+    //用于视频播放页获取视频点赞数的api
+    public function actionGetvideolikes()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $videoID = \Yii::$app->request->get('videoID');
+        
+        $likes = Videolikes::find()
+            ->where(['VideoID' => $videoID])
+            ->one();
+        
+        if($likes == null){
+            $likes = new Videolikes();
+            $likes->VideoID = $videoID;
+            $likes->Likes = 0;
+            $likes->save();
+        }
+
+        $likesnum = $likes->Likes;
+        $likesnum=json_encode($likesnum);
+        // 格式化为 JSON 并返回
+        return $likesnum;
+    }
+
+    //用于文章详情页获取文章点赞数的api
+    public function actionGetarticlelikes()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $articleID = \Yii::$app->request->get('articleID');
+        
+        $likes = Articlelikes::find()
+            ->where(['ArticleID' => $articleID])
+            ->one();
+        
+        if($likes == null){
+            $likes = new Articlelikes();
+            $likes->ArticleID = $articleID;
+            $likes->Likes = 0;
+            $likes->save();
+        }
+
+        $likesnum = $likes->Likes;
+        $likesnum=json_encode($likesnum);
+        // 格式化为 JSON 并返回
+        return $likesnum;
+    }
+
+    //在视频播放页增加点赞量的api
+    public function actionAddvideolikes()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $videoID = \Yii::$app->request->get('videoID');
+        
+        $likes = Videolikes::find()
+            ->where(['VideoID' => $videoID])
+            ->one();
+        
+        if($likes == null){
+            $likes = new Videolikes();
+            $likes->VideoID = $videoID;
+            $likes->Likes = 0;
+            $likes->save();
+        }
+
+        $likes->Likes = $likes->Likes + 1;
+        if ($likes->save()) {
+            return ['status' => 1, 'message' => '点赞量增加成功'];
+        } else {
+            return ['status' => -1, 'message' => '点赞量增加失败'];
+        }
+    }
+
+    //在文章详情页增加点赞量的api
+    public function actionAddarticlelikes()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $articleID = \Yii::$app->request->get('articleID');
+        
+        $likes = Articlelikes::find()
+            ->where(['ArticleID' => $articleID])
+            ->one();
+        
+        if($likes == null){
+            $likes = new Articlelikes();
+            $likes->ArticleID = $articleID;
+            $likes->Likes = 0;
+            $likes->save();
+        }
+
+        $likes->Likes = $likes->Likes + 1;
+        if ($likes->save()) {
+            return ['status' => 1, 'message' => '点赞量增加成功'];
+        } else {
+            return ['status' => -1, 'message' => '点赞量增加失败'];
+        }
     }
 }

@@ -16,6 +16,7 @@ use Yii;
  *
  * @property Comments[] $comments
  * @property Videocomments[] $videocomments
+ * @property Videolikes[] $videolikes
  */
 class Videos extends \yii\db\ActiveRecord
 {
@@ -73,5 +74,15 @@ class Videos extends \yii\db\ActiveRecord
     public function getVideocomments()
     {
         return $this->hasMany(Videocomments::class, ['VideoID' => 'VideoID']);
+    }
+
+    /**
+     * Gets query for [[Videolikes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVideolikes()
+    {
+        return $this->hasMany(Videolikes::class, ['VideoID' => 'VideoID']);
     }
 }
