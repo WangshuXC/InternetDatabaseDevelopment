@@ -11,6 +11,9 @@ use Yii;
  * @property string $Title
  * @property string|null $Content
  * @property string|null $PublicationDate
+ *
+ * @property Articlecomments[] $articlecomments
+ * @property Articlelikes[] $articlelikes
  */
 class Articles extends \yii\db\ActiveRecord
 {
@@ -46,5 +49,25 @@ class Articles extends \yii\db\ActiveRecord
             'Content' => 'Content',
             'PublicationDate' => 'Publication Date',
         ];
+    }
+
+    /**
+     * Gets query for [[Articlecomments]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticlecomments()
+    {
+        return $this->hasMany(Articlecomments::class, ['ArticleID' => 'ArticleID']);
+    }
+
+    /**
+     * Gets query for [[Articlelikes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticlelikes()
+    {
+        return $this->hasMany(Articlelikes::class, ['ArticleID' => 'ArticleID']);
     }
 }

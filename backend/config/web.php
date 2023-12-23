@@ -68,6 +68,10 @@ $config = [
                 'api/getvideopagecount' => 'api/getvideopagecount',
                 'api/getarticlepagecount' => 'api/getarticlepagecount',
                 'api/checkwebviews' => 'api/checkwebviews',
+                'api/getvideolikes' => 'api/getvideolikes',
+                'api/getarticlelikes' => 'api/getarticlelikes',
+                'api/addvideolikes' => 'api/addvideolikes',
+                'api/addarticlelikes' => 'api/addarticlelikes',
             ],
         ],
         'response' => [
