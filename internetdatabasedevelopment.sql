@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `internetdatabasedevelopment`
+CREATE DATABASE  IF NOT EXISTS `internetdatabasedevelopment`;
 USE `internetdatabasedevelopment`;
 /*
  Navicat Premium Data Transfer
@@ -29,7 +29,7 @@ CREATE TABLE `admins`  (
   PRIMARY KEY (`AdminID`) USING BTREE,
   INDEX `admins_ibfk_1`(`Username` ASC) USING BTREE,
   CONSTRAINT `admins_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `users` (`username`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of admins
@@ -51,7 +51,7 @@ CREATE TABLE `articlecomments`  (
   INDEX `fk_article_comments_username`(`Username` ASC) USING BTREE,
   CONSTRAINT `article_comments_ibfk_2` FOREIGN KEY (`ArticleID`) REFERENCES `articles` (`articleid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_article_comments_username` FOREIGN KEY (`Username`) REFERENCES `users` (`username`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4  COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of articlecomments
@@ -67,7 +67,7 @@ CREATE TABLE `articlelikes`  (
   `Likes` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`LikeID`) USING BTREE,
   INDEX `ArticleID`(`ArticleID`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Records of articlelikes
@@ -150,11 +150,11 @@ DROP TABLE IF EXISTS `clicks`;
 CREATE TABLE `clicks`  (
   `ClickID` int(11) NOT NULL AUTO_INCREMENT,
   `ContentID` int(11) NOT NULL,
-  `ContentType` enum('Article','Video') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ContentType` enum('Article','Video') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `ClickCount` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`ClickID`) USING BTREE,
   UNIQUE INDEX `ContentID_ContentType`(`ContentID` ASC, `ContentType` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of clicks
@@ -165,14 +165,14 @@ CREATE TABLE `clicks`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `personalinfo`;
 CREATE TABLE `personalinfo`  (
-  `Name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `Info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `AvatarURL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `Email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `GitHubAccount` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `WeChatID` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `Name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `AvatarURL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `Email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `GitHubAccount` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `WeChatID` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`Name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of personalinfo
@@ -231,7 +231,7 @@ CREATE TABLE `videolikes`  (
   `Likes` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`LikeID`) USING BTREE,
   INDEX `VideoID`(`VideoID`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Records of videolikes
@@ -362,7 +362,7 @@ DROP TABLE IF EXISTS `webviews`;
 CREATE TABLE `webviews`  (
   `Views` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`Views`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of webviews
