@@ -21,7 +21,7 @@ export default {
         },
         {
           title: '团队作业',
-          link: 'public/data/'
+          link: 'public/data/LFZW_团队作业(2110951_2112106_2112414_2113419).zip'
         },
         {
           title: '张昊星',
