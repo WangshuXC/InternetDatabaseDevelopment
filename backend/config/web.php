@@ -18,9 +18,8 @@ $config = [
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'JNYqG-lRFV3nWlJn-h56ovmOGnitNP5C',
-            'enableCsrfValidation' => false //今晚的问题主要是这个配置， 解除 cors 令牌，yii有个机制每个请求需要传入cors令牌  ，那这边就先撤了？ok感谢！
+            'enableCsrfValidation' => false 
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
